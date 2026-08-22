@@ -2,6 +2,7 @@ from datetime import datetime
 
 from sqlalchemy import DateTime, ForeignKey, Integer, Text
 from sqlalchemy.orm import Mapped, mapped_column
+from sqlalchemy.orm import relationship
 
 from app.database import Base
 
@@ -15,7 +16,7 @@ class Review(Base):
     )
 
     user_id: Mapped[int] = mapped_column(
-        ForeignKey("user.user_id"),
+        ForeignKey("users.user_id"),
         nullable=False,
     )
 
@@ -24,9 +25,9 @@ class Review(Base):
         nullable=False,
     )
 
-    text: Mapped[str | None] = mapped_column(
+    text: Mapped[str] = mapped_column(
         Text,
-        nullable=True,
+        nullable=False,
     )
 
     score: Mapped[int] = mapped_column(
@@ -37,4 +38,14 @@ class Review(Base):
     created_at: Mapped[datetime] = mapped_column(
         DateTime,
         nullable=False,
+    )
+
+    user = relationship(
+        "User",
+        back_populates="reviews",
+    )
+
+    anime = relationship(
+        "Anime",
+        back_populates="reviews",
     )

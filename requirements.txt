@@ -5,3 +5,4 @@ asyncpg
 pydantic
 python-dotenv
 bcrypt
+greenlet

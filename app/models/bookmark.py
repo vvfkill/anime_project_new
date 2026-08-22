@@ -2,6 +2,7 @@ from datetime import datetime
 
 from sqlalchemy import DateTime, ForeignKey, Integer
 from sqlalchemy.orm import Mapped, mapped_column
+from sqlalchemy.orm import relationship
 
 from app.database import Base
 
@@ -15,7 +16,7 @@ class Bookmark(Base):
     )
 
     user_id: Mapped[int] = mapped_column(
-        ForeignKey("user.user_id"),
+        ForeignKey("users.user_id"),
         nullable=False,
     )
 
@@ -27,4 +28,14 @@ class Bookmark(Base):
     created_at: Mapped[datetime] = mapped_column(
         DateTime,
         nullable=False,
+    )
+
+    user = relationship(
+        "User",
+        back_populates="bookmarks",
+    )
+
+    anime = relationship(
+        "Anime",
+        back_populates="bookmarks",
     )
