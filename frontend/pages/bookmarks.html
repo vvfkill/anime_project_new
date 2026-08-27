@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AnimeTrack — Закладки</title>
+    <link rel="stylesheet" href="../css/style.css" />
+</head>
+<body class="bookmarks-page">
+    <div class="page-shell">
+        <div id="siteHeader"></div>
+
+        <main class="bookmarks-layout">
+            <aside class="filters-panel glass">
+                <h2>Фильтры</h2>
+
+                <div class="filter-group">
+                    <div class="filter-title-row">
+                        <h3>Тип</h3>
+                    </div>
+
+                    <label class="filter-check">
+                        <input type="checkbox" name="bookmarkType" value="TV Сериал" >
+                        <span>TV Сериал</span>
+                    </label>
+
+                    <label class="filter-check">
+                        <input type="checkbox" name="bookmarkType" value="Фильм">
+                        <span>Фильм</span>
+                    </label>
+
+                    <label class="filter-check">
+                        <input type="checkbox" name="bookmarkType" value="OVA">
+                        <span>OVA</span>
+                    </label>
+
+                    <label class="filter-check">
+                        <input type="checkbox" name="bookmarkType" value="ONA">
+                        <span>ONA</span>
+                    </label>
+
+                    <label class="filter-check">
+                        <input type="checkbox" name="bookmarkType" value="Спешл">
+                        <span>Спешл</span>
+                    </label>
+                </div>
+
+                <div class="filter-group">
+                    <div class="filter-title-row">
+                        <h3>Жанры</h3>
+                    </div>
+
+                    <label class="filter-check">
+                        <input type="checkbox" name="bookmarkGenre" value="Экшен">
+                        <span>Экшен</span>
+                    </label>
+
+                    <label class="filter-check">
+                        <input type="checkbox" name="bookmarkGenre" value="Приключения">
+                        <span>Приключения</span>
+                    </label>
+
+                    <label class="filter-check">
+                        <input type="checkbox" name="bookmarkGenre" value="Комедия">
+                        <span>Комедия</span>
+                    </label>
+
+                    <label class="filter-check">
+                        <input type="checkbox" name="bookmarkGenre" value="Драма">
+                        <span>Драма</span>
+                    </label>
+
+                    <label class="filter-check">
+                        <input type="checkbox" name="bookmarkGenre" value="Фэнтези">
+                        <span>Фэнтези</span>
+                    </label>
+                </div>
+
+                <div class="filter-group">
+                    <h3>Год выпуска</h3>
+
+                    <div class="year-filter-row">
+                        <input id="yearFromInput" type="number" value="1950" min="1950" max="2026">
+                        <span>—</span>
+                        <input id="yearToInput" type="number" value="2026" min="1950" max="2026">
+                    </div>
+                </div>
+
+                <div class="filter-group">
+                    <h3>Рейтинг</h3>
+
+                    <div class="rating-filter-grid">
+                        <button type="button" class="filter-chip" data-rating="9">★ 9 и выше</button>
+                        <button type="button" class="filter-chip" data-rating="8">★ 8 и выше</button>
+                        <button type="button" class="filter-chip" data-rating="7">★ 7 и выше</button>
+                        <button type="button" class="filter-chip" data-rating="6">★ 6 и выше</button>
+                    </div>
+                </div>
+
+                <button type="button" id="applyFiltersBtn" class="primary-btn wide-btn">
+                    Применить фильтры
+                </button>
+
+                <button type="button" id="resetFiltersBtn" class="secondary-btn wide-btn">
+                    Сбросить все
+                </button>
+            </aside>
+
+            <section class="bookmarks-content">
+                <div class="section-header-row">
+                    <div>
+                        <h1>Закладки</h1>
+                        <p id="bookmarksCount">Загрузка...</p>
+                    </div>
+
+                    <div class="sort-box glass">
+                        <span>Сортировать:</span>
+                        <select id="sortSelect">
+                            <option value="date">Дата добавления</option>
+                            <option value="rating">Рейтинг</option>
+                            <option value="year">Год выпуска</option>
+                            <option value="title">Название</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="tabs-line">
+                    <button type="button" class="tab-link active" data-type="all">Все</button>
+                    <button type="button" class="tab-link" data-type="TV Сериал">Сериалы</button>
+                    <button type="button" class="tab-link" data-type="Фильм">Фильмы</button>
+                    <button type="button" class="tab-link" data-type="OVA">OVA</button>
+                    <button type="button" class="tab-link" data-type="ONA">ONA</button>
+                    <button type="button" class="tab-link" data-type="Спешл">Спешлы</button>
+                </div>
+
+                <div id="bookmarksGrid" class="bookmarks-grid">
+                    <p>Загрузка закладок...</p>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="../js/header.js"></script>
+    <script src="../js/bookmarks.js"></script>
+</body>
+</html>

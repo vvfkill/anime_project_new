@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AnimeTrack — Вход и регистрация</title>
+    <link rel="stylesheet" href="../css/style.css" />
+</head>
+<body class="auth-page">
+    <main class="auth-layout">
+        <section class="auth-left">
+            <div class="auth-brand">
+                <div class="logo">Anime<span>Track</span></div>
+                <div class="auth-brand-subtitle">Ваш личный мир аниме</div>
+            </div>
+        </section>
+
+        <section class="auth-right">
+            <div class="auth-card">
+                <div class="auth-tabs">
+                    <button id="tabLogin" type="button" class="auth-tab active">Вход</button>
+                    <button id="tabRegister" type="button" class="auth-tab">Регистрация</button>
+                </div>
+
+                <div class="auth-header">
+                    <h1 id="authTitle">Вход в аккаунт</h1>
+                    <p id="authSubtitle">Добро пожаловать обратно. Продолжите отслеживать любимое аниме.</p>
+                </div>
+
+                <div id="authMessage" class="auth-message"></div>
+
+                <form id="loginForm" class="auth-form" autocomplete="on">
+                    <div class="auth-field-group">
+                        <label for="loginEmail">Email</label>
+                        <div class="auth-input-wrap">
+                            <div class="auth-input-icon">✉</div>
+                            <input
+                                id="loginEmail"
+                                name="email"
+                                type="email"
+                                placeholder="Введите ваш email"
+                                required
+                            />
+                        </div>
+                    </div>
+
+                    <div class="auth-field-group">
+                        <label for="loginPassword">Пароль</label>
+                        <div class="auth-input-wrap">
+                            <div class="auth-input-icon">🔒</div>
+                            <input
+                                id="loginPassword"
+                                name="password"
+                                type="password"
+                                placeholder="Введите ваш пароль"
+                                required
+                            />
+                            <button id="loginTogglePassword" type="button" class="password-toggle" aria-label="Показать пароль">
+                                👁
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="auth-row-between">
+                    
+
+                        <a href="#" class="auth-link">Забыли пароль?</a>
+                    </div>
+
+                    <button type="submit" class="auth-submit">Войти</button>
+
+                    <div class="auth-divider">или</div>
+
+                    <div class="auth-switch-text">
+                        Нет аккаунта?
+                        <a
+                            href="#"
+                            class="auth-link"
+                            onclick="document.getElementById('tabRegister').click(); return false;"
+                        >
+                            Зарегистрироваться
+                        </a>
+                    </div>
+                </form>
+
+                <form id="registerForm" class="auth-form hidden" autocomplete="on">
+                    <div class="auth-field-group">
+                        <label for="registerNickname">Никнейм</label>
+                        <div class="auth-input-wrap">
+                            <div class="auth-input-icon">👤</div>
+                            <input
+                                id="registerNickname"
+                                name="nickname"
+                                type="text"
+                                placeholder="Введите никнейм"
+                                required
+                            />
+                        </div>
+                    </div>
+
+                    <div class="auth-field-group">
+                        <label for="registerEmail">Email</label>
+                        <div class="auth-input-wrap">
+                            <div class="auth-input-icon">✉</div>
+                            <input
+                                id="registerEmail"
+                                name="email"
+                                type="email"
+                                placeholder="Введите email"
+                                required
+                            />
+                        </div>
+                    </div>
+
+                    <div class="auth-field-group">
+                        <label for="registerPhone">Телефон</label>
+                        <div class="auth-input-wrap">
+                            <div class="auth-input-icon">☎</div>
+                            <input
+                                id="registerPhone"
+                                name="phone"
+                                type="tel"
+                                placeholder="Введите номер телефона"
+                                required
+                            />
+                        </div>
+                    </div>
+
+                    <div class="auth-field-group">
+                        <label for="registerPassword">Пароль</label>
+                        <div class="auth-input-wrap">
+                            <div class="auth-input-icon">🔒</div>
+                            <input
+                                id="registerPassword"
+                                name="password"
+                                type="password"
+                                placeholder="Введите пароль"
+                                required
+                            />
+                            <button id="registerTogglePassword" type="button" class="password-toggle" aria-label="Показать пароль">
+                                👁
+                            </button>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="auth-submit">Зарегистрироваться</button>
+
+                    <div class="auth-switch-text">
+                        Уже есть аккаунт?
+                        <a
+                            href="#"
+                            class="auth-link"
+                            onclick="document.getElementById('tabLogin').click(); return false;"
+                        >
+                            Войти
+                        </a>
+                    </div>
+                </form>
+
+                <div class="auth-legal">
+                    Продолжая, вы соглашаетесь с нашими
+                    <a href="#">Правилами использования</a>
+                    и
+                    <a href="#">Политикой конфиденциальности</a>.
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="../js/auth.js"></script>
+</body>
+</html>

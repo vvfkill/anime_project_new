@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AnimeTrack — Профиль</title>
+    <link rel="stylesheet" href="../css/style.css" />
+</head>
+<body class="profile-page">
+    <div class="page-shell">
+        <div id="siteHeader"></div>
+
+        <main class="profile-layout">
+            <aside class="profile-sidebar glass">
+                <nav class="profile-menu">
+                    <a class="active" href="profile.html">Мой профиль</a>
+                    <a href="list.html">Мой список</a>
+                    <a href="bookmarks.html">Закладки</a>
+                    <a href="reviews.html">Отзывы</a>
+                </nav>
+
+                <div class="profile-sidebar-card">
+                    <p>
+                        Отслеживайте, оценивайте и сохраняйте любимые аниме вместе с AnimeTrack.
+                    </p>
+                </div>
+            </aside>
+
+            <section class="profile-content">
+                <section class="profile-hero glass">
+                    <div class="profile-avatar" id="profileAvatar">A</div>
+
+                    <div class="profile-main-info">
+                        <h1 id="profileName">Пользователь</h1>
+                        <p id="profileEmail">@email</p>
+                        <p id="profileDate">Дата регистрации: —</p>
+
+                        <p class="profile-description">
+                            Личный профиль пользователя AnimeTrack.
+                        </p>
+
+                        <button type="button" class="secondary-btn" id="logoutBtn">
+                            Выйти из аккаунта
+                        </button>
+                    </div>
+                </section>
+
+                <section class="profile-stats glass">
+                    <div class="profile-stat">
+                        <span>Всего в списке</span>
+                        <strong id="totalListCount">0</strong>
+                        <p>аниме</p>
+                    </div>
+
+                    <div class="profile-stat">
+                        <span>Смотрю</span>
+                        <strong id="watchingCount">0</strong>
+                        <p>аниме</p>
+                    </div>
+
+                    <div class="profile-stat">
+                        <span>Запланировано</span>
+                        <strong id="plannedCount">0</strong>
+                        <p>аниме</p>
+                    </div>
+
+                    <div class="profile-stat">
+                        <span>Закладки</span>
+                        <strong id="bookmarksCount">0</strong>
+                        <p>аниме</p>
+                    </div>
+
+                    <div class="profile-stat">
+                        <span>Средняя оценка</span>
+                        <strong id="averageScore">—</strong>
+                        <p>из 10</p>
+                    </div>
+
+                    <div class="profile-stat">
+                        <span>Отзывы</span>
+                        <strong id="reviewsCount">0</strong>
+                        <p>написано</p>
+                    </div>
+                </section>
+
+                <section class="profile-grid">
+                    <div class="profile-panel glass">
+                        <div class="profile-panel-head">
+                            <h2>Продолжаю смотреть</h2>
+                            <a href="list.html">Смотреть все</a>
+                        </div>
+
+                        <div id="watchingList" class="profile-mini-list">
+                            <p>Загрузка...</p>
+                        </div>
+                    </div>
+
+                    <div class="profile-panel glass">
+                        <div class="profile-panel-head">
+                            <h2>Последние отзывы</h2>
+                            <a href="reviews.html">Смотреть все</a>
+                        </div>
+
+                        <div id="profileReviews" class="profile-review-list">
+                            <p>Загрузка...</p>
+                        </div>
+                    </div>
+
+                    <div class="profile-panel glass profile-wide-panel">
+                        <div class="profile-panel-head">
+                            <h2>Недавно добавленные в закладки</h2>
+                            <a href="bookmarks.html">Смотреть все</a>
+                        </div>
+
+                        <div id="profileBookmarks" class="profile-bookmark-row">
+                            <p>Загрузка...</p>
+                        </div>
+                    </div>
+                </section>
+            </section>
+        </main>
+    </div>
+
+    <script src="../js/header.js"></script>
+    <script src="../js/profile.js"></script>
+</body>
+</html>

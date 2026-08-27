@@ -1,0 +1,858 @@
+/* =========================
+   ГЛАВНАЯ СТРАНИЦА
+========================= */
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(245, 245, 250, 0.9),
+            rgba(225, 220, 240, 0.7)
+        );
+
+    color: #1d1d24;
+}
+
+
+/* =========================
+   ОСНОВНОЙ КОНТЕЙНЕР
+========================= */
+
+.app-wrapper {
+    display: flex;
+
+    min-height: 100vh;
+
+    padding: 28px;
+
+    background:
+        rgba(255, 255, 255, 0.35);
+}
+
+
+/* =========================
+   ЛЕВАЯ ПАНЕЛЬ
+========================= */
+
+.sidebar {
+    width: 165px;
+
+    display: flex;
+    flex-direction: column;
+
+    padding: 40px 28px;
+
+    background:
+        rgba(255, 255, 255, 0.42);
+
+    border:
+        1px solid rgba(255, 255, 255, 0.5);
+
+    backdrop-filter:
+        blur(20px);
+}
+
+
+.logo {
+    text-decoration: none;
+
+    color: #202027;
+
+    font-size: 15px;
+
+    font-weight: 700;
+
+    letter-spacing: 4px;
+}
+
+
+.sidebar-nav {
+    display: flex;
+    flex-direction: column;
+
+    gap: 30px;
+
+    margin-top: 110px;
+}
+
+
+.sidebar-link {
+    position: relative;
+
+    text-decoration: none;
+
+    color: #888893;
+
+    font-size: 14px;
+
+    transition:
+        0.2s ease;
+}
+
+
+.sidebar-link:hover {
+    color: #6d5bd0;
+}
+
+
+.sidebar-link.active {
+    color: #6d5bd0;
+
+    font-weight: 600;
+}
+
+
+.sidebar-link.active::after {
+    content: "";
+
+    position: absolute;
+
+    width: 25px;
+    height: 2px;
+
+    left: 30px;
+    top: 8px;
+
+    background: #6d5bd0;
+}
+
+
+.sidebar-bottom {
+    margin-top: auto;
+
+    font-size: 11px;
+
+    color: #8c8c96;
+}
+
+
+/* =========================
+   ОСНОВНОЙ КОНТЕНТ
+========================= */
+
+.main-content {
+    flex: 1;
+
+    min-width: 0;
+
+    padding:
+        0 70px 70px;
+
+    background:
+        rgba(255, 255, 255, 0.2);
+
+    backdrop-filter:
+        blur(20px);
+}
+
+
+/* =========================
+   HEADER
+========================= */
+
+.header {
+    height: 90px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+}
+
+
+.menu-button {
+    border: none;
+
+    background: transparent;
+
+    font-size: 22px;
+
+    cursor: pointer;
+
+    color: #252530;
+}
+
+
+.top-navigation {
+    display: flex;
+
+    gap: 45px;
+
+    margin-left: 80px;
+}
+
+
+.top-navigation a {
+    text-decoration: none;
+
+    color: #4b4b55;
+
+    font-size: 11px;
+
+    font-weight: 600;
+
+    letter-spacing: 0.5px;
+
+    transition:
+        0.2s ease;
+}
+
+
+.top-navigation a:hover {
+    color: #6d5bd0;
+}
+
+
+.header-actions {
+    display: flex;
+
+    align-items: center;
+}
+
+
+.login-link {
+    text-decoration: none;
+
+    color: #252530;
+
+    font-size: 11px;
+
+    font-weight: 600;
+
+    letter-spacing: 0.5px;
+}
+
+
+/* =========================
+   HERO
+========================= */
+
+.hero {
+    display: grid;
+
+    grid-template-columns:
+        minmax(0, 3fr)
+        minmax(280px, 1.1fr);
+
+    min-height: 440px;
+}
+
+
+/* =========================
+   ФОНОВАЯ ЧАСТЬ HERO
+========================= */
+
+.hero-image {
+    position: relative;
+
+    overflow: hidden;
+
+    min-height: 100%;
+
+    background:
+        rgba(18, 16, 35, 0.8);
+}
+
+
+/* САМА КАРТИНКА */
+
+.hero-image::before {
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    background-image:
+        url("../images/hero1.jpg");
+
+    background-size: cover;
+
+    background-position: center;
+
+    opacity: 0.25;
+}
+
+
+/* ДОПОЛНИТЕЛЬНОЕ ЗАТЕМНЕНИЕ */
+
+
+
+
+/* КОНТЕНТ ПОВЕРХ КАРТИНКИ */
+
+.hero-overlay {
+    position: relative;
+
+    z-index: 1;
+
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+
+    align-items: center;
+
+    padding: 70px 80px;
+}
+
+
+.hero-content {
+    color: white;
+}
+
+
+.hero-number {
+    display: block;
+
+    margin-bottom: 30px;
+
+    color:
+        rgba(255, 255, 255, 0.7);
+
+    font-size: 13px;
+
+    letter-spacing: 2px;
+}
+
+
+.hero-content h1 {
+    margin: 0;
+
+    font-size:
+        clamp(42px, 4vw, 68px);
+
+    line-height: 1.05;
+
+    font-weight: 600;
+
+    letter-spacing: -2px;
+}
+
+
+.hero-content p {
+    margin:
+        30px 0;
+
+    font-size: 16px;
+
+    line-height: 1.6;
+
+    color:
+        rgba(255, 255, 255, 0.8);
+}
+
+
+/* КНОПКА */
+
+.hero-button {
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 55px;
+
+    padding:
+        17px 24px;
+
+    border:
+        1px solid rgba(255, 255, 255, 0.7);
+
+    color: white;
+
+    text-decoration: none;
+
+    font-size: 11px;
+
+    font-weight: 600;
+
+    letter-spacing: 1px;
+
+    transition:
+        0.25s ease;
+}
+
+
+.hero-button:hover {
+    background:
+        rgba(255, 255, 255, 0.15);
+}
+
+
+.hero-button span {
+    font-size: 22px;
+
+    font-weight: 300;
+}
+
+
+/* =========================
+   HERO INFO
+========================= */
+
+.hero-info {
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+
+    padding: 60px;
+
+    background:
+        rgba(255, 255, 255, 0.38);
+
+    backdrop-filter:
+        blur(15px);
+}
+
+
+.hero-info-number {
+    color: #6d5bd0;
+
+    font-size: 18px;
+
+    font-weight: 600;
+
+    margin-bottom: 35px;
+}
+
+
+.hero-info h2 {
+    margin: 0;
+
+    font-size: 34px;
+
+    line-height: 1.2;
+
+    font-weight: 600;
+}
+
+
+.accent-line {
+    width: 38px;
+
+    height: 2px;
+
+    margin:
+        35px 0 25px;
+
+    background: #6d5bd0;
+}
+
+
+.hero-info p {
+    max-width: 260px;
+
+    margin: 0;
+
+    color: #777782;
+
+    font-size: 14px;
+
+    line-height: 1.7;
+}
+
+
+/* =========================
+   СТРЕЛКИ HERO
+========================= */
+
+.hero-arrows {
+    display: flex;
+
+    align-items: center;
+
+    gap: 25px;
+
+    margin-top: auto;
+
+    padding-top: 50px;
+}
+
+
+.hero-arrows button {
+    border: none;
+
+    background: transparent;
+
+    font-size: 25px;
+
+    cursor: pointer;
+
+    color: #33333c;
+
+    transition:
+        0.2s ease;
+}
+
+
+.hero-arrows button:hover {
+    color: #6d5bd0;
+}
+
+
+.hero-line {
+    flex: 1;
+
+    height: 1px;
+
+    background:
+        rgba(0, 0, 0, 0.1);
+}
+
+
+/* =========================
+   СЕКЦИИ АНИМЕ
+========================= */
+
+.anime-section {
+    margin-top: 55px;
+}
+
+
+.section-header {
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    margin-bottom: 28px;
+}
+
+
+.section-header h2 {
+    margin: 0;
+
+    font-size: 12px;
+
+    letter-spacing: 4px;
+
+    font-weight: 600;
+}
+
+
+.see-all-btn {
+    text-decoration: none;
+
+    color: #555560;
+
+    font-size: 10px;
+
+    font-weight: 600;
+
+    letter-spacing: 1px;
+
+    transition:
+        0.2s ease;
+}
+
+
+.see-all-btn:hover {
+    color: #6d5bd0;
+}
+
+
+/* =========================
+   КАРТОЧКИ АНИМЕ
+========================= */
+
+.anime-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(
+            auto-fit,
+            minmax(145px, 1fr)
+        );
+
+    gap: 30px;
+}
+
+
+.anime-card-link {
+    text-decoration: none;
+
+    color: inherit;
+}
+
+
+.anime-card {
+    transition:
+        transform 0.25s ease;
+}
+
+
+.anime-card:hover {
+    transform:
+        translateY(-6px);
+}
+
+
+.anime-card img {
+    width: 100%;
+
+    aspect-ratio:
+        2 / 3;
+
+    object-fit: cover;
+
+    display: block;
+
+    border-radius: 3px;
+
+    background: #e5e5e5;
+}
+
+
+.anime-card-content {
+    padding-top: 13px;
+}
+
+
+.anime-card h3 {
+    margin: 0;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    line-height: 1.4;
+
+    color: #2a2a33;
+}
+
+
+.anime-original-title {
+    display: none;
+}
+
+
+.anime-card-rating {
+    margin: 7px 0 0;
+
+    font-size: 12px;
+
+    color: #6d5bd0;
+}
+
+
+.empty-text {
+    color: #777782;
+}
+
+
+/* =========================
+   ОБНОВЛЁННЫЕ КАРТОЧКИ
+========================= */
+
+.anime-poster {
+    position: relative;
+
+    width: 100%;
+
+    aspect-ratio: 2 / 3;
+
+    overflow: hidden;
+
+    background: #e8e8e8;
+}
+
+
+.anime-poster img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    display: block;
+
+    transition:
+        transform 0.35s ease;
+}
+
+
+.anime-card:hover .anime-poster img {
+    transform:
+        scale(1.04);
+}
+
+
+.anime-rating {
+    position: absolute;
+
+    top: 10px;
+    left: 10px;
+
+    padding:
+        5px 8px;
+
+    background:
+        rgba(255, 255, 255, 0.9);
+
+    color: #4d456f;
+
+    font-size: 11px;
+
+    font-weight: 600;
+
+    border-radius: 2px;
+}
+
+
+.anime-card-content {
+    padding-top: 12px;
+}
+
+
+.anime-card h3 {
+    margin: 0;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    color: #292932;
+
+    white-space: nowrap;
+
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+}
+
+
+.anime-year {
+    margin:
+        7px 0 0;
+
+    font-size: 11px;
+
+    color: #888894;
+}
+
+
+/* =========================
+   АДАПТАЦИЯ
+========================= */
+
+@media (
+    max-width: 1100px
+) {
+
+    .main-content {
+        padding:
+            0 35px 50px;
+    }
+
+    .hero-overlay {
+        padding: 50px;
+    }
+
+    .hero-info {
+        padding: 40px;
+    }
+
+    .top-navigation {
+        gap: 25px;
+
+        margin-left: 30px;
+    }
+
+}
+
+
+@media (
+    max-width: 850px
+) {
+
+    .app-wrapper {
+        padding: 0;
+    }
+
+    .sidebar {
+        display: none;
+    }
+
+    .main-content {
+        padding:
+            0 25px 50px;
+    }
+
+    .top-navigation {
+        display: none;
+    }
+
+    .hero {
+        grid-template-columns: 1fr;
+    }
+
+    .hero-info {
+        min-height: 300px;
+    }
+
+}
+
+
+@media (
+    max-width: 550px
+) {
+
+    .header {
+        height: 70px;
+    }
+
+    .hero-overlay {
+        padding: 40px 25px;
+    }
+
+    .hero-content h1 {
+        font-size: 42px;
+    }
+
+    .anime-grid {
+        grid-template-columns:
+            repeat(2, 1fr);
+
+        gap: 18px;
+    }
+
+    .hero-info {
+        padding: 35px 25px;
+    }
+
+}
+
+.poster-placeholder {
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 20px;
+
+    background:
+        rgba(0, 0, 0, 0.08);
+
+    color: #777782;
+
+    font-size: 12px;
+
+    text-align: center;
+}

@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>AnimeHub</title>
+
+    <link
+        rel="stylesheet"
+        href="../css/base.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="../css/layout.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="../css/components.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="../css/style.css"
+    >
+</head>
+
+<body>
+
+    <div class="app-wrapper">
+
+        <!-- Левая панель -->
+
+        <aside class="sidebar">
+
+            <a
+                href="index.html"
+                class="logo"
+            >
+                ANIMEHUB
+            </a>
+
+            <nav class="sidebar-nav">
+
+                <a
+                    href="index.html"
+                    class="sidebar-link active"
+                >
+                    01
+                </a>
+
+                <a
+                    href="catalog.html"
+                    class="sidebar-link"
+                >
+                    02
+                </a>
+
+                <a
+                    href="reviews.html"
+                    class="sidebar-link"
+                >
+                    03
+                </a>
+
+                <a
+                    href="bookmarks.html"
+                    class="sidebar-link"
+                >
+                    04
+                </a>
+
+            </nav>
+
+            <div class="sidebar-bottom">
+
+                <span>© 2026</span>
+
+            </div>
+
+        </aside>
+
+
+        <!-- Основная часть -->
+
+        <main class="main-content">
+
+            <!-- Верхнее меню -->
+
+            <header class="header">
+
+                <button
+                    class="menu-button"
+                    type="button"
+                >
+                    ☰
+                </button>
+
+                <nav class="top-navigation">
+
+                    <a href="catalog.html">
+                        КАТАЛОГ
+                    </a>
+
+                    <a href="catalog.html">
+                        НОВИНКИ
+                    </a>
+
+                    <a href="catalog.html">
+                        ЖАНРЫ
+                    </a>
+
+                    <a href="catalog.html">
+                        ПОДБОРКИ
+                    </a>
+
+                </nav>
+
+                <div class="header-actions">
+
+                    <a
+                        href="login.html"
+                        class="login-link"
+                    >
+                        ВОЙТИ
+                    </a>
+
+                </div>
+
+            </header>
+
+
+            <!-- Hero-блок -->
+
+            <section class="hero">
+
+                <div class="hero-image">
+
+                    <div class="hero-overlay">
+
+                        <div class="hero-content">
+
+                            <span class="hero-number">
+                                01
+                            </span>
+
+                            <h1>
+                                АНИМЕ,<br>
+                                КОТОРОЕ<br>
+                                ВДОХНОВЛЯЕТ
+                            </h1>
+
+                            <p>
+                                Смотри, оценивай и находи<br>
+                                своё любимое аниме
+                            </p>
+
+                            <a
+                                href="catalog.html"
+                                class="hero-button"
+                            >
+                                ПЕРЕЙТИ В КАТАЛОГ
+                                <span>→</span>
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Правая часть hero -->
+
+                <div class="hero-info">
+
+                    <span class="hero-info-number">
+                        01
+                    </span>
+
+                    <h2>
+                        Мир аниме<br>
+                        в одном месте
+                    </h2>
+
+                    <div class="accent-line"></div>
+
+                    <p>
+                        Открывай новые истории,
+                        находи единомышленников
+                        и сохраняй лучшее.
+                    </p>
+
+                    <div class="hero-arrows">
+
+                        <button
+                            type="button"
+                            id="heroPrev"
+                        >
+                            ←
+                        </button>
+
+                        <div class="hero-line"></div>
+
+                        <button
+                            type="button"
+                            id="heroNext"
+                        >
+                            →
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- Популярное -->
+
+            <section class="anime-section">
+
+                <div class="section-header">
+
+                    <h2>
+                        ПОПУЛЯРНОЕ
+                    </h2>
+
+                    <a
+                        href="catalog.html"
+                        class="see-all-btn"
+                    >
+                        СМОТРЕТЬ ВСЕ →
+                    </a>
+
+                </div>
+
+                <div
+                    class="anime-grid"
+                    id="popularAnime"
+                >
+                    <p class="empty-text">
+                        Загрузка...
+                    </p>
+                </div>
+
+            </section>
+
+
+            <!-- Новинки -->
+
+            <section class="anime-section">
+
+                <div class="section-header">
+
+                    <h2>
+                        НОВИНКИ
+                    </h2>
+
+                    <a
+                        href="catalog.html"
+                        class="see-all-btn"
+                    >
+                        СМОТРЕТЬ ВСЕ →
+                    </a>
+
+                </div>
+
+                <div
+                    class="anime-grid"
+                    id="newAnime"
+                >
+                    <p class="empty-text">
+                        Загрузка...
+                    </p>
+                </div>
+
+            </section>
+
+        </main>
+
+    </div>
+
+
+    <script src="../js/app.js"></script>
+
+</body>
+
+</html>
