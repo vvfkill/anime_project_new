@@ -9,6 +9,7 @@ from app.models.genre import Genre
 from app.models.tag import Tag
 from app.models.studio import Studio
 from app.schemas.anime import CreateAnimeSchema
+from app.models.character import Character
 
 
 class AnimeService:
@@ -143,7 +144,7 @@ class AnimeService:
                 selectinload(Anime.seasons),
                 selectinload(Anime.reviews),
                 selectinload(Anime.characters)
-                .selectinload("seiyus"),
+                .selectinload(Character.seiyus),
             )
         )
 
