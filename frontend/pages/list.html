@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Мой список — AnimeHub</title>
+
+    <link
+        rel="stylesheet"
+        href="../css/base.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="../css/layout.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="../css/components.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="../css/style.css"
+    >
+
+</head>
+
+
+<body>
+
+    <div class="app-wrapper">
+
+        <!-- Левая панель -->
+
+        <aside class="sidebar">
+
+            <a
+                href="index.html"
+                class="logo"
+            >
+                ANIMEHUB
+            </a>
+
+
+            <nav class="sidebar-nav">
+
+                <a
+                    href="index.html"
+                    class="sidebar-link"
+                >
+                    01
+                </a>
+
+
+                <a
+                    href="catalog.html"
+                    class="sidebar-link"
+                >
+                    02
+                </a>
+
+
+                <a
+                    href="list.html"
+                    class="sidebar-link active"
+                >
+                    03
+                </a>
+
+
+                <a
+                    href="bookmarks.html"
+                    class="sidebar-link"
+                >
+                    04
+                </a>
+
+            </nav>
+
+
+            <div class="sidebar-bottom">
+
+                <span>
+                    © 2026
+                </span>
+
+            </div>
+
+        </aside>
+
+
+        <!-- Основной контент -->
+
+        <main class="main-content">
+
+
+            <!-- Верхнее меню -->
+
+            <header class="header">
+
+                <button
+                    class="menu-button"
+                    type="button"
+                >
+                    ☰
+                </button>
+
+
+                <nav class="top-navigation">
+
+                    <a href="index.html">
+                        ГЛАВНАЯ
+                    </a>
+
+
+                    <a href="catalog.html">
+                        КАТАЛОГ
+                    </a>
+
+
+                    <a
+                        href="list.html"
+                        class="nav-active"
+                    >
+                        СПИСОК
+                    </a>
+
+
+                    <a href="bookmarks.html">
+                        ЗАКЛАДКИ
+                    </a>
+
+
+                    <a href="reviews.html">
+                        ОТЗЫВЫ
+                    </a>
+
+                </nav>
+
+
+                <div class="header-actions">
+
+                    <a
+                        href="login.html"
+                        class="login-link"
+                    >
+                        ВОЙТИ
+                    </a>
+
+                </div>
+
+            </header>
+
+
+            <!-- Страница списка -->
+
+            <section class="my-list-page">
+
+
+                <div class="list-top">
+
+                    <div class="list-title">
+
+                        <h1>
+                            МОЙ СПИСОК
+                        </h1>
+
+                        <p>
+                            Твои аниме, твои правила.
+                        </p>
+
+                        <p>
+                            Смотри, отслеживай и возвращайся к любимому.
+                        </p>
+
+                    </div>
+
+
+                    <div class="list-search">
+
+                        <input
+                            type="text"
+                            id="listSearch"
+                            placeholder="Поиск в списке..."
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <!-- Фильтры -->
+
+                <div class="list-controls">
+
+
+                    <div class="status-tabs">
+
+                        <button
+                            class="status-tab active"
+                            data-status="all"
+                        >
+                            ВСЕ
+                        </button>
+
+
+                        <button
+                            class="status-tab"
+                            data-status="watching"
+                        >
+                            СМОТРЮ
+                        </button>
+
+
+                        <button
+                            class="status-tab"
+                            data-status="planned"
+                        >
+                            ЗАПЛАНИРОВАНО
+                        </button>
+
+
+                        <button
+                            class="status-tab"
+                            data-status="completed"
+                        >
+                            ПРОСМОТРЕНО
+                        </button>
+
+
+                        <button
+                            class="status-tab"
+                            data-status="postponed"
+                        >
+                            ОТЛОЖЕНО
+                        </button>
+
+
+                        <button
+                            class="status-tab"
+                            data-status="dropped"
+                        >
+                            БРОШЕНО
+                        </button>
+
+                    </div>
+
+
+                    <select
+                        id="listSort"
+                    >
+
+                        <option value="recent">
+                            СОРТИРОВКА: НЕДАВНИЕ
+                        </option>
+
+                        <option value="rating">
+                            ПО РЕЙТИНГУ
+                        </option>
+
+                        <option value="title">
+                            ПО НАЗВАНИЮ
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <!-- Список -->
+
+                <div
+                    class="anime-list"
+                    id="animeList"
+                >
+
+                </div>
+
+
+            </section>
+
+        </main>
+
+    </div>
+
+
+    <script
+        src="../js/list.js"
+    ></script>
+
+</body>
+
+</html>
