@@ -10,19 +10,25 @@ document.addEventListener("DOMContentLoaded", async () => {
     try {
 
         const response = await fetch(
-            "/api/anime"
+            "http://127.0.0.1:8000/api/anime/"
         );
 
 
         if (!response.ok) {
+
             throw new Error(
                 "Не удалось загрузить аниме"
             );
+
         }
 
 
-        const animeList =
+        const data =
             await response.json();
+
+
+        const animeList =
+            data.items || [];
 
 
         /* =========================
@@ -67,7 +73,9 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     } catch (error) {
 
-        console.error(error);
+        console.error(
+            error
+        );
 
 
         if (popularContainer) {
@@ -108,7 +116,9 @@ function renderAnime(
 ) {
 
     if (!container) {
+
         return;
+
     }
 
 
@@ -147,35 +157,25 @@ function renderAnime(
 function createAnimeCard(anime) {
 
     const title =
-        anime.title ||
-        anime.name ||
+        anime.titleRu ||
+        anime.titleOriginal ||
         "Без названия";
 
 
     const year =
         anime.releaseYear ||
-        anime.year ||
         "";
 
 
     const rating =
-        anime.averageRating ||
-        anime.rating ||
+        anime.averageRating ??
         "—";
 
 
     let imageUrl =
         anime.posterUrl ||
-        anime.poster ||
-        anime.imageUrl ||
-        anime.image ||
         "";
 
-
-    /* =========================
-       ИСПРАВЛЕНИЕ ПУТИ
-       К ИЗОБРАЖЕНИЮ
-    ========================= */
 
     if (
         imageUrl &&
