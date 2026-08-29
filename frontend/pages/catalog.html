@@ -1,142 +1,294 @@
 <!DOCTYPE html>
 <html lang="ru">
+
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>AnimeTrack — Каталог</title>
-    <link rel="stylesheet" href="../css/style.css" />
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Каталог — AnimeHub</title>
+
+    <link
+        rel="stylesheet"
+        href="../css/base.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="../css/layout.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="../css/components.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="../css/style.css"
+    >
+
 </head>
-<body class="catalog-page">
-    <div class="page-shell">
-        <div id="siteHeader"></div>
 
-        <main class="catalog-layout">
-            <aside class="filters-panel glass">
-                <h2>Фильтры</h2>
+<body>
 
-                <div class="filter-group">
-                    <div class="filter-title-row">
-                        <h3>Тип</h3>
-                    </div>
+    <div class="app-wrapper">
 
-                    <label class="filter-check">
-                        <input type="checkbox" name="catalogType" value="TV Сериал">
-                        <span>TV Сериал</span>
-                    </label>
+        <!-- Боковая панель -->
 
-                    <label class="filter-check">
-                        <input type="checkbox" name="catalogType" value="Фильм">
-                        <span>Фильм</span>
-                    </label>
+        <aside class="sidebar">
 
-                    <label class="filter-check">
-                        <input type="checkbox" name="catalogType" value="OVA">
-                        <span>OVA</span>
-                    </label>
+            <a
+                href="index.html"
+                class="logo"
+            >
+                ANIMEHUB
+            </a>
 
-                    <label class="filter-check">
-                        <input type="checkbox" name="catalogType" value="ONA">
-                        <span>ONA</span>
-                    </label>
+            <nav class="sidebar-nav">
 
-                    <label class="filter-check">
-                        <input type="checkbox" name="catalogType" value="Спешл">
-                        <span>Спешл</span>
-                    </label>
-                </div>
+                <a
+                    href="index.html"
+                    class="sidebar-link"
+                >
+                    01
+                </a>
 
-                <div class="filter-group">
-                    <div class="filter-title-row">
-                        <h3>Жанры</h3>
-                    </div>
+                <a
+                    href="catalog.html"
+                    class="sidebar-link active"
+                >
+                    02
+                </a>
 
-                    <label class="filter-check">
-                        <input type="checkbox" name="catalogGenre" value="Экшен">
-                        <span>Экшен</span>
-                    </label>
+                <a
+                    href="list.html"
+                    class="sidebar-link"
+                >
+                    03
+                </a>
 
-                    <label class="filter-check">
-                        <input type="checkbox" name="catalogGenre" value="Приключения">
-                        <span>Приключения</span>
-                    </label>
+                <a
+                    href="bookmarks.html"
+                    class="sidebar-link"
+                >
+                    04
+                </a>
 
-                    <label class="filter-check">
-                        <input type="checkbox" name="catalogGenre" value="Комедия">
-                        <span>Комедия</span>
-                    </label>
+            </nav>
 
-                    <label class="filter-check">
-                        <input type="checkbox" name="catalogGenre" value="Драма">
-                        <span>Драма</span>
-                    </label>
+            <div class="sidebar-bottom">
+                <span>© 2026</span>
+            </div>
 
-                    <label class="filter-check">
-                        <input type="checkbox" name="catalogGenre" value="Фэнтези">
-                        <span>Фэнтези</span>
-                    </label>
-                </div>
+        </aside>
 
-                <div class="filter-group">
-                    <h3>Год выпуска</h3>
 
-                    <div class="year-filter-row">
-                        <input id="catalogYearFromInput" type="number" value="1950" min="1950" max="2026">
-                        <span>—</span>
-                        <input id="catalogYearToInput" type="number" value="2026" min="1950" max="2026">
-                    </div>
-                </div>
+        <!-- Основной контент -->
 
-                <div class="filter-group">
-                    <h3>Рейтинг</h3>
+        <main class="main-content">
 
-                    <div class="rating-filter-grid">
-                        <button type="button" class="filter-chip" data-rating="9">★ 9 и выше</button>
-                        <button type="button" class="filter-chip" data-rating="8">★ 8 и выше</button>
-                        <button type="button" class="filter-chip" data-rating="7">★ 7 и выше</button>
-                        <button type="button" class="filter-chip" data-rating="6">★ 6 и выше</button>
-                    </div>
-                </div>
+            <!-- Header -->
 
-                <button id="applyCatalogFiltersBtn" type="button" class="primary-btn wide-btn">
-                    Применить фильтры
+            <header class="header">
+
+                <button
+                    class="menu-button"
+                    type="button"
+                >
+                    ☰
                 </button>
 
-                <button id="resetCatalogFiltersBtn" type="button" class="secondary-btn wide-btn">
-                    Сбросить все
-                </button>
-            </aside>
 
-            <section class="catalog-content">
-                <div class="catalog-head">
+                <nav class="top-navigation">
+
+                    <a href="index.html">
+                        ГЛАВНАЯ
+                    </a>
+
+                    <a
+                        href="catalog.html"
+                        class="nav-active"
+                    >
+                        КАТАЛОГ
+                    </a>
+
+                    <a href="list.html">
+                        СПИСОК
+                    </a>
+
+                    <a href="bookmarks.html">
+                        ЗАКЛАДКИ
+                    </a>
+
+                    <a href="reviews.html">
+                        ОТЗЫВЫ
+                    </a>
+
+                </nav>
+
+
+                <div class="header-actions">
+
+                    <a
+                        href="login.html"
+                        class="login-link"
+                    >
+                        ВОЙТИ
+                    </a>
+
+                </div>
+
+            </header>
+
+
+            <!-- Каталог -->
+
+            <section class="catalog-page">
+
+                <div class="catalog-top">
+
                     <div>
-                        <h1>Каталог аниме</h1>
-                        <p id="catalogCount">Загрузка...</p>
+
+                        <h1>
+                            КАТАЛОГ
+                        </h1>
+
+                        <p>
+                            Исследуй нашу коллекцию аниме.
+                        </p>
+
+                        <p>
+                            Фильтруй, находи и смотри лучшее.
+                        </p>
+
                     </div>
 
-                    <div class="sort-box glass">
-                        <span>Сортировать:</span>
-                        <select id="catalogSortSelect">
-                            <option value="default">По умолчанию</option>
-                            <option value="rating">По рейтингу</option>
-                            <option value="title">По названию</option>
-                        </select>
+
+                    <!-- Поиск -->
+
+                    <div class="catalog-search">
+
+                        <input
+                            type="text"
+                            id="searchInput"
+                            placeholder="Поиск аниме..."
+                        >
+
                     </div>
+
                 </div>
 
-                <div id="catalogGrid" class="catalog-grid">
-                    <p>Загрузка каталога...</p>
+
+                <!-- Фильтры -->
+
+                <div class="catalog-filters">
+
+                    <select id="genreFilter">
+
+                        <option value="">
+                            ЖАНРЫ
+                        </option>
+
+                    </select>
+
+
+                    <select id="yearFilter">
+
+                        <option value="">
+                            ГОД
+                        </option>
+
+                    </select>
+
+
+                    <select id="typeFilter">
+
+                        <option value="">
+                            СТАТУС
+                        </option>
+
+                    </select>
+
+
+                    <select id="sortFilter">
+
+                        <option value="rating">
+                            СОРТИРОВКА: ПО ПОПУЛЯРНОСТИ
+                        </option>
+
+                        <option value="year">
+                            СНАЧАЛА НОВЫЕ
+                        </option>
+
+                        <option value="title">
+                            ПО НАЗВАНИЮ
+                        </option>
+
+                    </select>
+
                 </div>
 
-                <div class="catalog-pagination">
-                    <button id="prevPageBtn" type="button" class="secondary-btn">Назад</button>
-                    <span id="pageInfo">Страница 1</span>
-                    <button id="nextPageBtn" type="button" class="secondary-btn">Вперёд</button>
+
+                <!-- Карточки -->
+
+                <div
+                    class="catalog-grid"
+                    id="catalogAnime"
+                >
+
+                    <p class="empty-text">
+                        Загрузка...
+                    </p>
+
                 </div>
+
+
+                <!-- Пагинация -->
+
+                <div
+                    class="pagination"
+                    id="pagination"
+                >
+
+                    <button
+                        type="button"
+                        id="prevPage"
+                    >
+                        ←
+                    </button>
+
+
+                    <div
+                        class="pagination-pages"
+                        id="paginationPages"
+                    >
+                    </div>
+
+
+                    <button
+                        type="button"
+                        id="nextPage"
+                    >
+                        →
+                    </button>
+
+                </div>
+
             </section>
+
         </main>
+
     </div>
 
-    <script src="../js/header.js"></script>
-    <script src="../js/catalog.js"></script>
+
+    <script
+        src="../js/catalog.js"
+    ></script>
+
 </body>
+
 </html>
