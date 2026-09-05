@@ -1,136 +1,323 @@
 <!DOCTYPE html>
 <html lang="ru">
+
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>AnimeTrack — Отзывы</title>
-    <link rel="stylesheet" href="../css/style.css" />
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        Отзывы — AnimeHub
+    </title>
+
+
+    <link
+        rel="stylesheet"
+        href="../css/base.css"
+    >
+
+
+    <link
+        rel="stylesheet"
+        href="../css/layout.css"
+    >
+
+
+    <link
+        rel="stylesheet"
+        href="../css/components.css"
+    >
+
+
+    <link
+        rel="stylesheet"
+        href="../css/pages/reviews.css"
+    >
+
 </head>
-<body class="reviews-page">
-    <div class="page-shell">
-        <div id="siteHeader"></div>
 
-        <main class="reviews-layout">
-            <aside class="filters-panel glass">
-                <h2>Фильтры</h2>
 
-                <div class="filter-group">
-                    <div class="filter-title-row">
-                        <h3>Тип</h3>
-                    </div>
+<body>
 
-                    <label class="filter-check">
-                        <input type="checkbox" name="reviewType" value="TV Сериал">
-                        <span>TV Сериал</span>
-                    </label>
+    <div class="app-wrapper">
 
-                    <label class="filter-check">
-                        <input type="checkbox" name="reviewType" value="Фильм">
-                        <span>Фильм</span>
-                    </label>
 
-                    <label class="filter-check">
-                        <input type="checkbox" name="reviewType" value="OVA">
-                        <span>OVA</span>
-                    </label>
+        <!-- БОКОВАЯ ПАНЕЛЬ -->
 
-                    <label class="filter-check">
-                        <input type="checkbox" name="reviewType" value="ONA">
-                        <span>ONA</span>
-                    </label>
+        <aside class="sidebar">
 
-                    <label class="filter-check">
-                        <input type="checkbox" name="reviewType" value="Спешл">
-                        <span>Спешл</span>
-                    </label>
-                </div>
+            <a
+                href="index.html"
+                class="logo"
+            >
+                ANIMEHUB
+            </a>
 
-                <div class="filter-group">
-                    <div class="filter-title-row">
-                        <h3>Жанры</h3>
-                    </div>
 
-                    <label class="filter-check">
-                        <input type="checkbox" name="reviewGenre" value="Экшен">
-                        <span>Экшен</span>
-                    </label>
+            <nav class="sidebar-nav">
 
-                    <label class="filter-check">
-                        <input type="checkbox" name="reviewGenre" value="Приключения">
-                        <span>Приключения</span>
-                    </label>
+                <a href="index.html" class="sidebar-link">
+                    01
+                </a>
 
-                    <label class="filter-check">
-                        <input type="checkbox" name="reviewGenre" value="Комедия">
-                        <span>Комедия</span>
-                    </label>
+                <a href="catalog.html" class="sidebar-link">
+                    02
+                </a>
 
-                    <label class="filter-check">
-                        <input type="checkbox" name="reviewGenre" value="Драма">
-                        <span>Драма</span>
-                    </label>
+                <a href="list.html" class="sidebar-link">
+                    03
+                </a>
 
-                    <label class="filter-check">
-                        <input type="checkbox" name="reviewGenre" value="Фэнтези">
-                        <span>Фэнтези</span>
-                    </label>
-                </div>
+                <a href="bookmarks.html" class="sidebar-link">
+                    04
+                </a>
 
-                <div class="filter-group">
-                    <h3>Год выпуска</h3>
+                <a href="reviews.html" class="sidebar-link active">
+                    05
+                </a>
 
-                    <div class="year-filter-row">
-                        <input id="reviewYearFromInput" type="number" value="1950" min="1950" max="2026">
-                        <span>—</span>
-                        <input id="reviewYearToInput" type="number" value="2026" min="1950" max="2026">
-                    </div>
-                </div>
+            </nav>
 
-                <div class="filter-group">
-                    <h3>Оценка отзыва</h3>
 
-                    <div class="rating-filter-grid">
-                        <button type="button" class="filter-chip" data-rating="9">★ 9 и выше</button>
-                        <button type="button" class="filter-chip" data-rating="8">★ 8 и выше</button>
-                        <button type="button" class="filter-chip" data-rating="7">★ 7 и выше</button>
-                        <button type="button" class="filter-chip" data-rating="6">★ 6 и выше</button>
-                    </div>
-                </div>
+            <div class="sidebar-bottom">
 
-                <button type="button" id="applyReviewFiltersBtn" class="primary-btn wide-btn">
-                    Применить фильтры
+                <span>
+                    © 2026
+                </span>
+
+            </div>
+
+        </aside>
+
+
+        <!-- ОСНОВНАЯ ЧАСТЬ -->
+
+        <main class="main-content">
+
+
+            <!-- HEADER -->
+
+            <header class="header">
+
+                <button
+                    class="menu-button"
+                    type="button"
+                >
+                    ☰
                 </button>
 
-                <button type="button" id="resetReviewFiltersBtn" class="secondary-btn wide-btn">
-                    Сбросить все
-                </button>
-            </aside>
 
-            <section class="reviews-content">
-                <div class="reviews-head">
-                    <div>
-                        <h1>Отзывы пользователей</h1>
-                        <p id="reviewsCount">Загрузка...</p>
-                    </div>
+                <nav class="top-navigation">
 
-                    <div class="sort-box glass">
-                        <span>Сортировать:</span>
-                        <select id="reviewsSortSelect">
-                            <option value="date">Новые сначала</option>
-                            <option value="score">По оценке</option>
-                            <option value="title">По названию</option>
-                        </select>
-                    </div>
+                    <a href="index.html">
+                        ГЛАВНАЯ
+                    </a>
+
+
+                    <a href="catalog.html">
+                        КАТАЛОГ
+                    </a>
+
+
+                    <a href="list.html">
+                        СПИСОК
+                    </a>
+
+
+                    <a href="bookmarks.html">
+                        ЗАКЛАДКИ
+                    </a>
+
+
+                    <a
+                        href="reviews.html"
+                        class="nav-active"
+                    >
+                        ОТЗЫВЫ
+                    </a>
+
+                </nav>
+
+
+                <div class="header-actions">
+
+                    <a
+                        href="login.html"
+                        class="login-link"
+                    >
+                        ВОЙТИ
+                    </a>
+
                 </div>
 
-                <div id="reviewsList" class="reviews-feed">
-                    <p>Загрузка отзывов...</p>
+            </header>
+
+
+            <!-- СТРАНИЦА ОТЗЫВОВ -->
+
+            <section class="reviews-page">
+
+
+                <!-- ВЕРХНЯЯ ЧАСТЬ -->
+
+                <div class="reviews-top">
+
+
+                    <div class="reviews-heading">
+
+                        <h1>
+                            ОТЗЫВЫ
+                        </h1>
+
+
+                        <p>
+                            Читайте отзывы других зрителей
+                            <br>
+                            и делитесь своим мнением об аниме.
+                        </p>
+
+                    </div>
+
+
+                    <!-- ПОИСК -->
+
+                    <div class="reviews-search">
+
+                        <input
+                            type="text"
+                            id="searchInput"
+                            placeholder="Поиск отзывов..."
+                        >
+
+                    </div>
+
                 </div>
+
+
+                <!-- ФИЛЬТРЫ -->
+
+                <div class="reviews-filters">
+
+                    <div class="status-tabs">
+
+                        <button
+                            type="button"
+                            class="review-filter active"
+                            data-filter="all"
+                        >
+                            ВСЕ
+                        </button>
+
+                        <button
+                            type="button"
+                            class="review-filter"
+                            data-filter="positive"
+                        >
+                            ПОЛОЖИТЕЛЬНЫЕ
+                        </button>
+
+                        <button
+                            type="button"
+                            class="review-filter"
+                            data-filter="negative"
+                        >
+                            ОТРИЦАТЕЛЬНЫЕ
+                        </button>
+
+                        <button
+                            type="button"
+                            class="review-filter"
+                            data-filter="my"
+                        >
+                            С МОИМИ ОЦЕНКАМИ
+                        </button>
+
+                    </div>
+
+
+                    <select id="sortFilter">
+
+                        <option value="new">
+                            СОРТИРОВКА: СВЕЖИЕ СНАЧАЛА
+                        </option>
+
+                        <option value="old">
+                            СТАРЫЕ СНАЧАЛА
+                        </option>
+
+                        <option value="rating">
+                            ПО ОЦЕНКЕ
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <!-- СПИСОК ОТЗЫВОВ -->
+
+                <div
+                    class="reviews-list"
+                    id="reviewsContainer"
+                >
+
+                    <p class="empty-text">
+                        Загрузка...
+                    </p>
+
+                </div>
+
+
+                <!-- ПАГИНАЦИЯ -->
+
+                <div
+                    class="pagination"
+                    id="pagination"
+                >
+
+                    <button
+                        type="button"
+                        id="prevPage"
+                    >
+                        ←
+                    </button>
+
+
+                    <div
+                        class="pagination-pages"
+                        id="paginationPages"
+                    >
+                    </div>
+
+
+                    <button
+                        type="button"
+                        id="nextPage"
+                    >
+                        →
+                    </button>
+
+                </div>
+
+
             </section>
+
         </main>
+
     </div>
 
-    <script src="../js/header.js"></script>
-    <script src="../js/reviews.js"></script>
+
+    <!-- JAVASCRIPT -->
+
+    <script
+        src="../js/reviews.js"
+    ></script>
+
+
 </body>
+
 </html>

@@ -28,7 +28,7 @@
 
     <link
         rel="stylesheet"
-        href="../css/style.css"
+        href="../css/pages/bookmarks.css"
     >
 
 </head>
@@ -51,38 +51,23 @@
 
             <nav class="sidebar-nav">
 
-                <a
-                    href="index.html"
-                    class="sidebar-link"
-                >
+                <a href="index.html" class="sidebar-link">
                     01
                 </a>
 
-                <a
-                    href="catalog.html"
-                    class="sidebar-link"
-                >
+                <a href="catalog.html" class="sidebar-link">
                     02
                 </a>
 
-                <a
-                    href="list.html"
-                    class="sidebar-link"
-                >
+                <a href="list.html" class="sidebar-link">
                     03
                 </a>
 
-                <a
-                    href="bookmarks.html"
-                    class="sidebar-link active"
-                >
+                <a href="bookmarks.html" class="sidebar-link active">
                     04
                 </a>
 
-                <a
-                    href="reviews.html"
-                    class="sidebar-link"
-                >
+                <a href="reviews.html" class="sidebar-link">
                     05
                 </a>
 
@@ -99,13 +84,12 @@
 
             <header class="header">
 
-                <a
-                    href="index.html"
-                    class="mobile-logo"
+                <button
+                    class="menu-button"
+                    type="button"
                 >
-                    ANIMEHUB
-                </a>
-
+                    ☰
+                </button>
 
                 <nav class="top-navigation">
 
@@ -134,16 +118,18 @@
 
                 </nav>
 
+                <div class="header-actions">
 
-                <button
-                    class="header-search-button"
-                    type="button"
-                >
-                    ⌕
-                </button>
+                    <a
+                        href="login.html"
+                        class="login-link"
+                    >
+                        ВОЙТИ
+                    </a>
+
+                </div>
 
             </header>
-
 
             <!-- Верхняя часть -->
 
@@ -164,10 +150,6 @@
 
 
                 <div class="bookmarks-search">
-
-                    <span>
-                        ⌕
-                    </span>
 
                     <input
                         type="text"

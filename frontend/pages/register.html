@@ -9,7 +9,7 @@
         content="width=device-width, initial-scale=1.0"
     >
 
-    <title>Вход — AnimeHub</title>
+    <title>Регистрация — AnimeHub</title>
 
     <link
         rel="stylesheet"
@@ -47,11 +47,11 @@
 
             <nav class="auth-sidebar-nav">
 
-                <span class="active">
+                <span>
                     01
                 </span>
 
-                <span>
+                <span class="active">
                     02
                 </span>
 
@@ -106,19 +106,39 @@
                 <div class="auth-card">
 
                     <h1>
-                        Вход в аккаунт
+                        Создание аккаунта
                     </h1>
 
                     <p class="auth-description">
-                        Добро пожаловать обратно.
-                        Продолжите отслеживать любимое аниме.
+                        Создайте профиль, чтобы сохранять аниме,
+                        отзывы и закладки.
                     </p>
 
 
                     <form
-                        id="loginForm"
+                        id="registerForm"
                         class="auth-form"
                     >
+
+                        <div class="auth-field">
+
+                            <label>
+                                НИКНЕЙМ
+                            </label>
+
+                            <div class="auth-input-wrapper">
+
+                                <input
+                                    type="text"
+                                    name="nickname"
+                                    placeholder="Введите никнейм"
+                                    required
+                                >
+
+                            </div>
+
+                        </div>
+
 
                         <div class="auth-field">
 
@@ -127,10 +147,6 @@
                             </label>
 
                             <div class="auth-input-wrapper">
-
-                                <span class="input-icon">
-                                    @
-                                </span>
 
                                 <input
                                     type="email"
@@ -147,14 +163,30 @@
                         <div class="auth-field">
 
                             <label>
-                                ПАРОЛЬ
+                                ТЕЛЕФОН
                             </label>
 
                             <div class="auth-input-wrapper">
 
-                                <span class="input-icon">
-                                    •
-                                </span>
+                                <input
+                                    type="tel"
+                                    name="phone"
+                                    placeholder="Введите номер телефона"
+                                    required
+                                >
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="auth-field">
+
+                            <label>
+                                ПАРОЛЬ
+                            </label>
+
+                            <div class="auth-input-wrapper">
 
                                 <input
                                     type="password"
@@ -179,18 +211,18 @@
                             type="submit"
                             class="auth-submit-button"
                         >
-                            ВОЙТИ
+                            ЗАРЕГИСТРИРОВАТЬСЯ
                         </button>
 
 
                         <p class="auth-switch">
 
-                            Нет аккаунта?
+                            Уже есть аккаунт?
 
                             <a
-                                href="register.html"
+                                href="login.html"
                             >
-                                ЗАРЕГИСТРИРОВАТЬСЯ
+                                ВОЙТИ
                             </a>
 
                         </p>
