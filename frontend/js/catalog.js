@@ -366,7 +366,7 @@ document.addEventListener(
             return `
 
                 <a
-                    href="#"
+                    href="anime.html?id=${anime.id}"
                     class="anime-card-link"
                 >
 

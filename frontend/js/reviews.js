@@ -1,424 +1,930 @@
-const REVIEWS_API_URL = "https://localhost:7241/api/reviews";
+const REVIEWS_API_URL =
+    "/api/reviews/";
 
-const reviewsList = document.getElementById("reviewsList");
-const reviewsCount = document.getElementById("reviewsCount");
-const reviewsSortSelect = document.getElementById("reviewsSortSelect");
-const applyReviewFiltersBtn = document.getElementById("applyReviewFiltersBtn");
-const resetReviewFiltersBtn = document.getElementById("resetReviewFiltersBtn");
-const reviewYearFromInput = document.getElementById("reviewYearFromInput");
-const reviewYearToInput = document.getElementById("reviewYearToInput");
+
+const reviewsContainer =
+    document.getElementById(
+        "reviewsContainer"
+    );
+
+
+const searchInput =
+    document.getElementById(
+        "searchInput"
+    );
+
+
+const sortFilter =
+    document.getElementById(
+        "sortFilter"
+    );
+
+
+const filterButtons =
+    document.querySelectorAll(
+        ".review-filter"
+    );
+
+
+const prevPageButton =
+    document.getElementById(
+        "prevPage"
+    );
+
+
+const nextPageButton =
+    document.getElementById(
+        "nextPage"
+    );
+
+
+const paginationPages =
+    document.getElementById(
+        "paginationPages"
+    );
+
 
 let reviews = [];
 
-let currentRating = "all";
-let currentSort = "date";
-let currentYearFrom = 1950;
-let currentYearTo = 2026;
+let currentFilter = "all";
 
 let currentPage = 1;
+
 const pageSize = 5;
-let totalPages = 1;
 
-function getPosterUrl(posterUrl) {
-    const fallbackPoster = "../images/no-poster.jpg";
-
-    if (!posterUrl || String(posterUrl).trim() === "") return fallbackPoster;
-    if (posterUrl.startsWith("http")) return posterUrl;
-    if (posterUrl.startsWith("../")) return posterUrl;
-    if (posterUrl.startsWith("/")) return `https://localhost:7241${posterUrl}`;
-    if (posterUrl.startsWith("images/")) return `../${posterUrl}`;
-
-    return posterUrl;
-}
-
-function getSelectedValues(name) {
-    return [...document.querySelectorAll(`input[name="${name}"]:checked`)]
-        .map(input => input.value);
-}
-
-function getReviewAnimeTitle(review) {
-    return (
-        review.animeTitleRu ||
-        review.animeTitle ||
-        review.titleRu ||
-        review.title ||
-        review.titleOriginal ||
-        "Без названия"
-    );
-}
-
-function getReviewAnimeOriginalTitle(review) {
-    return review.animeTitleOriginal || review.titleOriginal || "";
-}
-
-function getReviewAnimeId(review) {
-    return review.animeId || review.anime_id;
-}
-
-function getReviewScore(review) {
-    return Number(review.score ?? review.rating ?? 0);
-}
-
-function getReviewText(review) {
-    return review.text || review.comment || review.content || "Текст отзыва отсутствует.";
-}
-
-function getReviewAuthor(review) {
-    return review.userNickname || review.nickname || review.userName || "Пользователь";
-}
-
-function getReviewGenres(review) {
-    const rawGenres = review.genres || review.Genres || review.genre || review.Genre;
-
-    if (Array.isArray(rawGenres)) {
-        return rawGenres.map(genre => {
-            if (typeof genre === "string") return genre;
-            return genre.name || genre.Name || genre.genreName || "";
-        }).filter(Boolean);
-    }
-
-    if (typeof rawGenres === "string") {
-        return rawGenres.split(",").map(genre => genre.trim()).filter(Boolean);
-    }
-
-    return [];
-}
-
-function getReviewDate(review) {
-    const rawDate = review.createdAt || review.created_at || review.date;
-
-    if (!rawDate) return "—";
-
-    return new Date(rawDate).toLocaleDateString("ru-RU");
-}
 
 async function loadReviews() {
-    try {
-        if (reviewsList) {
-            reviewsList.innerHTML = `<p>Загрузка отзывов...</p>`;
-        }
 
-        const response = await fetch(REVIEWS_API_URL);
+    try {
+
+        const response =
+            await fetch(
+                REVIEWS_API_URL
+            );
+
 
         if (!response.ok) {
-            throw new Error("Не удалось загрузить отзывы");
+
+            throw new Error(
+                "Не удалось загрузить отзывы"
+            );
+
         }
 
-        reviews = await response.json();
 
-        applyReviewsView(true);
+        reviews =
+            await response.json();
+
+
+        renderReviews();
+
     } catch (error) {
-        if (reviewsList) {
-            reviewsList.innerHTML = `
-                <div class="empty-state glass">
-                    <h2>Ошибка загрузки</h2>
-                    <p>${error.message}</p>
-                </div>
+
+        console.error(
+            "Ошибка загрузки отзывов:",
+            error
+        );
+
+
+        if (reviewsContainer) {
+
+            reviewsContainer.innerHTML = `
+                <p class="empty-text">
+                    Не удалось загрузить отзывы.
+                </p>
             `;
+
         }
 
-        if (reviewsCount) {
-            reviewsCount.textContent = "Ошибка загрузки данных";
-        }
     }
+
 }
+
+
+function getReviewTitle(review) {
+
+    return (
+        review.anime_title_ru ||
+        review.animeTitleRu ||
+        review.anime_title ||
+        review.animeTitle ||
+        review.title_ru ||
+        review.title ||
+        "Без названия"
+    );
+
+}
+
+
+function getReviewPoster(review) {
+
+    const poster =
+        review.poster_url ||
+        review.posterUrl ||
+        review.animePosterUrl;
+
+
+    if (!poster) {
+
+        return "../images/no-poster.jpg";
+
+    }
+
+
+    if (
+        poster.startsWith(
+            "http"
+        )
+    ) {
+
+        return poster;
+
+    }
+
+
+    if (
+        poster.startsWith(
+            "../"
+        )
+    ) {
+
+        return poster;
+
+    }
+
+
+    if (
+        poster.startsWith(
+            "images/"
+        )
+    ) {
+
+        return `../${poster}`;
+
+    }
+
+
+    return poster;
+
+}
+
+
+function getReviewText(review) {
+
+    return (
+        review.text ||
+        review.comment ||
+        review.content ||
+        "Текст отзыва отсутствует."
+    );
+
+}
+
+
+function getReviewScore(review) {
+
+    return (
+        review.score ||
+        review.rating ||
+        "—"
+    );
+
+}
+
+
+function getReviewAuthor(review) {
+
+    return (
+        review.nickname ||
+        review.user_nickname ||
+        review.userNickname ||
+        "Пользователь"
+    );
+
+}
+
+
+function getReviewDate(review) {
+
+    const date =
+        review.created_at ||
+        review.createdAt ||
+        review.date;
+
+
+    if (!date) {
+
+        return "Дата не указана";
+
+    }
+
+
+    return new Date(
+        date
+    ).toLocaleDateString(
+        "ru-RU"
+    );
+
+}
+
+
+function getReviewAnimeId(review) {
+
+    return (
+        review.anime_id ||
+        review.animeId
+    );
+
+}
+
 
 function getFilteredReviews() {
-    const selectedTypes = getSelectedValues("reviewType");
-    const selectedGenres = getSelectedValues("reviewGenre");
 
-    return reviews.filter(review => {
-        const type = String(review.type || review.animeType || "").toLowerCase();
-        const genres = getReviewGenres(review).map(genre => genre.toLowerCase());
-        const year = Number(review.releaseYear || review.animeReleaseYear || 0);
-        const score = getReviewScore(review);
+    let result =
+        [...reviews];
 
-        const typeMatches =
-            selectedTypes.length === 0 ||
-            selectedTypes.some(selected => type === selected.toLowerCase());
 
-        const genreMatches =
-            selectedGenres.length === 0 ||
-            selectedGenres.some(selected => genres.includes(selected.toLowerCase()));
+    /* Фильтр по поиску */
 
-        const yearMatches = year >= currentYearFrom && year <= currentYearTo;
+    const searchValue =
+        searchInput
+            ? searchInput.value
+                .trim()
+                .toLowerCase()
+            : "";
 
-        const ratingMatches =
-            currentRating === "all" ||
-            score >= Number(currentRating);
 
-        return typeMatches && genreMatches && yearMatches && ratingMatches;
-    });
-}
+    if (searchValue) {
 
-function getSortedReviews(list) {
-    const sorted = [...list];
+        result =
+            result.filter(
+                review => {
 
-    if (currentSort === "date") {
-        sorted.sort((a, b) => {
-            const dateA = new Date(a.createdAt || a.created_at || a.date || 0);
-            const dateB = new Date(b.createdAt || b.created_at || b.date || 0);
+                    const title =
+                        getReviewTitle(
+                            review
+                        )
+                            .toLowerCase();
 
-            return dateB - dateA;
-        });
+
+                    const text =
+                        getReviewText(
+                            review
+                        )
+                            .toLowerCase();
+
+
+                    return (
+                        title.includes(
+                            searchValue
+                        ) ||
+                        text.includes(
+                            searchValue
+                        )
+                    );
+
+                }
+            );
+
     }
 
-    if (currentSort === "score") {
-        sorted.sort((a, b) => getReviewScore(b) - getReviewScore(a));
+
+    /* Фильтр по оценке */
+
+    if (
+        currentFilter ===
+        "positive"
+    ) {
+
+        result =
+            result.filter(
+                review =>
+                    Number(
+                        getReviewScore(
+                            review
+                        )
+                    ) >= 7
+            );
+
     }
 
-    if (currentSort === "title") {
-        sorted.sort((a, b) => {
-            return getReviewAnimeTitle(a).localeCompare(getReviewAnimeTitle(b), "ru");
-        });
+
+    if (
+        currentFilter ===
+        "negative"
+    ) {
+
+        result =
+            result.filter(
+                review =>
+                    Number(
+                        getReviewScore(
+                            review
+                        )
+                    ) <= 4
+            );
+
     }
 
-    return sorted;
-}
 
-function getCurrentPageItems(list) {
-    totalPages = Math.max(1, Math.ceil(list.length / pageSize));
+    /* С МОИМИ ОЦЕНКАМИ */
 
-    if (currentPage > totalPages) {
-        currentPage = totalPages;
+    if (
+        currentFilter ===
+        "my"
+    ) {
+
+        /*
+            Пока авторизация
+            не подключена,
+            этот фильтр
+            ничего не выводит.
+
+            Позже сюда можно
+            добавить проверку
+            текущего пользователя.
+        */
+
+        result = [];
+
     }
 
-    const start = (currentPage - 1) * pageSize;
-    return list.slice(start, start + pageSize);
-}
 
-function renderReviewsPagination(listLength) {
-    const oldPagination = document.getElementById("reviewsPagination");
+    /* Сортировка */
 
-    if (oldPagination) {
-        oldPagination.remove();
-    }
+    if (sortFilter) {
 
-    if (!reviewsList || listLength === 0) return;
+        if (
+            sortFilter.value ===
+            "old"
+        ) {
 
-    totalPages = Math.max(1, Math.ceil(listLength / pageSize));
+            result.sort(
+                (a, b) => {
 
-    const pagination = document.createElement("div");
-    pagination.id = "reviewsPagination";
-    pagination.className = "reviews-pagination";
+                    const dateA =
+                        new Date(
+                            a.created_at ||
+                            a.createdAt ||
+                            a.date ||
+                            0
+                        );
 
-    pagination.innerHTML = `
-        <button type="button" id="prevReviewsPageBtn" class="secondary-btn" ${currentPage <= 1 ? "disabled" : ""}>
-            Назад
-        </button>
 
-        <span>Страница ${currentPage} из ${totalPages}</span>
+                    const dateB =
+                        new Date(
+                            b.created_at ||
+                            b.createdAt ||
+                            b.date ||
+                            0
+                        );
 
-        <button type="button" id="nextReviewsPageBtn" class="secondary-btn" ${currentPage >= totalPages ? "disabled" : ""}>
-            Вперёд
-        </button>
-    `;
 
-    reviewsList.insertAdjacentElement("afterend", pagination);
+                    return (
+                        dateA -
+                        dateB
+                    );
 
-    const prevBtn = document.getElementById("prevReviewsPageBtn");
-    const nextBtn = document.getElementById("nextReviewsPageBtn");
+                }
+            );
 
-    if (prevBtn) {
-        prevBtn.addEventListener("click", () => {
-            if (currentPage <= 1) return;
-            currentPage--;
-            applyReviewsView(false);
-        });
-    }
-
-    if (nextBtn) {
-        nextBtn.addEventListener("click", () => {
-            if (currentPage >= totalPages) return;
-            currentPage++;
-            applyReviewsView(false);
-        });
-    }
-}
-
-function applyReviewsView(resetPage = false) {
-    if (resetPage) {
-        currentPage = 1;
-    }
-
-    const filtered = getFilteredReviews();
-    const sorted = getSortedReviews(filtered);
-
-    renderReviews(sorted);
-}
-
-function renderReviews(list) {
-    if (!reviewsList) return;
-
-    if (!reviews || reviews.length === 0) {
-        if (reviewsCount) {
-            reviewsCount.textContent = "Отзывов пока нет";
         }
 
-        reviewsList.innerHTML = `
-            <div class="empty-state glass">
-                <h2>Отзывов пока нет</h2>
-                <p>Откройте страницу аниме и оставьте первый отзыв.</p>
-                <a class="primary-btn" href="catalog.html">Перейти в каталог</a>
-            </div>
-        `;
 
-        renderReviewsPagination(0);
-        return;
-    }
+        if (
+            sortFilter.value ===
+            "rating"
+        ) {
 
-    if (!list || list.length === 0) {
-        if (reviewsCount) {
-            reviewsCount.textContent = "По выбранным фильтрам ничего не найдено";
+            result.sort(
+                (a, b) => {
+
+                    return (
+                        Number(
+                            getReviewScore(
+                                b
+                            )
+                        ) -
+                        Number(
+                            getReviewScore(
+                                a
+                            )
+                        )
+                    );
+
+                }
+            );
+
         }
 
-        reviewsList.innerHTML = `
-            <div class="empty-state glass">
-                <h2>Ничего не найдено</h2>
-                <p>Попробуйте изменить фильтры.</p>
-            </div>
-        `;
 
-        renderReviewsPagination(0);
+        if (
+            sortFilter.value ===
+            "new"
+        ) {
+
+            result.sort(
+                (a, b) => {
+
+                    const dateA =
+                        new Date(
+                            a.created_at ||
+                            a.createdAt ||
+                            a.date ||
+                            0
+                        );
+
+
+                    const dateB =
+                        new Date(
+                            b.created_at ||
+                            b.createdAt ||
+                            b.date ||
+                            0
+                        );
+
+
+                    return (
+                        dateB -
+                        dateA
+                    );
+
+                }
+            );
+
+        }
+
+    }
+
+
+    return result;
+
+}
+
+
+function renderReviews() {
+
+    if (!reviewsContainer) {
+
+        console.error(
+            "Не найден reviewsContainer"
+        );
+
         return;
+
     }
 
-    if (reviewsCount) {
-        reviewsCount.textContent = `Найдено: ${list.length}`;
-    }
 
-    const pageItems = getCurrentPageItems(list);
+    const filteredReviews =
+        getFilteredReviews();
 
-    reviewsList.innerHTML = pageItems.map(review => {
-        const fallbackPoster = "../images/no-poster.jpg";
-        const poster = getPosterUrl(review.posterUrl || review.animePosterUrl || review.poster_url);
-        const title = getReviewAnimeTitle(review);
-        const originalTitle = getReviewAnimeOriginalTitle(review);
-        const animeId = getReviewAnimeId(review);
-        const score = getReviewScore(review) || "—";
-        const author = getReviewAuthor(review);
-        const date = getReviewDate(review);
-        const text = getReviewText(review);
-        const year = review.releaseYear || review.animeReleaseYear || "—";
-        const type = review.type || review.animeType || "—";
 
-        return `
-            <article class="review-feed-card glass" onclick="openAnime(${animeId})">
-                <img
-                    src="${poster}"
-                    alt="${title}"
-                    onerror="this.onerror=null; this.src='${fallbackPoster}';"
-                >
+    if (
+        filteredReviews.length ===
+        0
+    ) {
 
-                <div class="review-feed-body">
-                    <div class="review-feed-top">
-                        <div>
-                            <h3>${title}</h3>
-                            <p>${originalTitle}</p>
-                        </div>
-
-                        <div class="review-feed-score">
-                            ★ ${score}
-                        </div>
-                    </div>
-
-                    <div class="review-feed-meta">
-                        <span>${author}</span>
-                        <span>•</span>
-                        <span>${date}</span>
-                        <span>•</span>
-                        <span>${year}</span>
-                        <span>•</span>
-                        <span>${type}</span>
-                    </div>
-
-                    <p class="review-feed-text">
-                        ${text}
-                    </p>
-                </div>
-            </article>
+        reviewsContainer.innerHTML = `
+            <p class="empty-text">
+                Отзывы не найдены.
+            </p>
         `;
-    }).join("");
 
-    renderReviewsPagination(list.length);
+
+        renderPagination(
+            0
+        );
+
+        return;
+
+    }
+
+
+    const totalPages =
+        Math.ceil(
+            filteredReviews.length /
+            pageSize
+        );
+
+
+    if (
+        currentPage >
+        totalPages
+    ) {
+
+        currentPage =
+            totalPages;
+
+    }
+
+
+    const startIndex =
+        (
+            currentPage -
+            1
+        ) *
+        pageSize;
+
+
+    const pageReviews =
+        filteredReviews.slice(
+            startIndex,
+            startIndex +
+            pageSize
+        );
+
+
+    reviewsContainer.innerHTML =
+        pageReviews
+            .map(
+                review => {
+
+                    const title =
+                        getReviewTitle(
+                            review
+                        );
+
+
+                    const poster =
+                        getReviewPoster(
+                            review
+                        );
+
+
+                    const text =
+                        getReviewText(
+                            review
+                        );
+
+
+                    const score =
+                        getReviewScore(
+                            review
+                        );
+
+
+                    const author =
+                        getReviewAuthor(
+                            review
+                        );
+
+
+                    const date =
+                        getReviewDate(
+                            review
+                        );
+
+
+                    const animeId =
+                        getReviewAnimeId(
+                            review
+                        );
+
+
+                    return `
+                        <article
+                            class="review-card"
+                            data-anime-id="${animeId || ""}"
+                        >
+
+                            <img
+                                class="review-poster"
+                                src="${poster}"
+                                alt="${title}"
+                            >
+
+
+                            <div
+                                class="review-content"
+                            >
+
+                                <div
+                                    class="review-header"
+                                >
+
+                                    <h2>
+                                        ${title}
+                                    </h2>
+
+
+                                    <div
+                                        class="review-score"
+                                    >
+                                        ★ ${score}
+                                    </div>
+
+                                </div>
+
+
+                                <div
+                                    class="review-meta"
+                                >
+
+                                    <span>
+                                        ${author}
+                                    </span>
+
+                                    <span>
+                                        •
+                                    </span>
+
+                                    <span>
+                                        ${date}
+                                    </span>
+
+                                </div>
+
+
+                                <p
+                                    class="review-text"
+                                >
+                                    ${text}
+                                </p>
+
+                            </div>
+
+                        </article>
+                    `;
+
+                }
+            )
+            .join("");
+
+
+    renderPagination(
+        totalPages
+    );
+
 }
 
-function openAnime(animeId) {
-    if (!animeId) return;
-    window.location.href = `anime.html?id=${animeId}`;
+
+function renderPagination(
+    totalPages
+) {
+
+    if (!paginationPages) {
+
+        return;
+
+    }
+
+
+    paginationPages.innerHTML =
+        "";
+
+
+    if (
+        totalPages <=
+        1
+    ) {
+
+        if (prevPageButton) {
+
+            prevPageButton.disabled =
+                true;
+
+        }
+
+
+        if (nextPageButton) {
+
+            nextPageButton.disabled =
+                true;
+
+        }
+
+
+        return;
+
+    }
+
+
+    for (
+        let page = 1;
+        page <= totalPages;
+        page++
+    ) {
+
+        const button =
+            document.createElement(
+                "button"
+            );
+
+
+        button.type =
+            "button";
+
+
+        button.textContent =
+            page;
+
+
+        if (
+            page ===
+            currentPage
+        ) {
+
+            button.classList.add(
+                "active"
+            );
+
+        }
+
+
+        button.addEventListener(
+            "click",
+            () => {
+
+                currentPage =
+                    page;
+
+
+                renderReviews();
+
+            }
+        );
+
+
+        paginationPages.appendChild(
+            button
+        );
+
+    }
+
+
+    if (prevPageButton) {
+
+        prevPageButton.disabled =
+            currentPage ===
+            1;
+
+    }
+
+
+    if (nextPageButton) {
+
+        nextPageButton.disabled =
+            currentPage ===
+            totalPages;
+
+    }
+
 }
 
-function setupReviewFilters() {
-    document.querySelectorAll(".filter-chip").forEach(button => {
-        button.addEventListener("click", () => {
-            const isActive = button.classList.contains("active");
 
-            document.querySelectorAll(".filter-chip").forEach(item => {
-                item.classList.remove("active");
-            });
+/* Фильтры */
 
-            if (isActive) {
-                currentRating = "all";
-                return;
+filterButtons.forEach(
+    button => {
+
+        button.addEventListener(
+            "click",
+            () => {
+
+                filterButtons.forEach(
+                    item => {
+
+                        item.classList.remove(
+                            "active"
+                        );
+
+                    }
+                );
+
+
+                button.classList.add(
+                    "active"
+                );
+
+
+                currentFilter =
+                    button.dataset.filter;
+
+
+                currentPage =
+                    1;
+
+
+                renderReviews();
+
+            }
+        );
+
+    }
+);
+
+
+/* Поиск */
+
+if (searchInput) {
+
+    searchInput.addEventListener(
+        "input",
+        () => {
+
+            currentPage =
+                1;
+
+
+            renderReviews();
+
+        }
+    );
+
+}
+
+
+/* Сортировка */
+
+if (sortFilter) {
+
+    sortFilter.addEventListener(
+        "change",
+        () => {
+
+            currentPage =
+                1;
+
+
+            renderReviews();
+
+        }
+    );
+
+}
+
+
+/* Предыдущая страница */
+
+if (prevPageButton) {
+
+    prevPageButton.addEventListener(
+        "click",
+        () => {
+
+            if (
+                currentPage >
+                1
+            ) {
+
+                currentPage--;
+
+
+                renderReviews();
+
             }
 
-            button.classList.add("active");
-            currentRating = button.dataset.rating;
-        });
-    });
+        }
+    );
 
-    if (reviewsSortSelect) {
-        reviewsSortSelect.addEventListener("change", () => {
-            currentSort = reviewsSortSelect.value;
-            applyReviewsView(true);
-        });
-    }
-
-    if (applyReviewFiltersBtn) {
-        applyReviewFiltersBtn.addEventListener("click", () => {
-            currentYearFrom = Number(reviewYearFromInput?.value || 1950);
-            currentYearTo = Number(reviewYearToInput?.value || 2026);
-
-            if (currentYearFrom > currentYearTo) {
-                const temp = currentYearFrom;
-                currentYearFrom = currentYearTo;
-                currentYearTo = temp;
-
-                if (reviewYearFromInput) reviewYearFromInput.value = String(currentYearFrom);
-                if (reviewYearToInput) reviewYearToInput.value = String(currentYearTo);
-            }
-
-            applyReviewsView(true);
-        });
-    }
-
-    if (resetReviewFiltersBtn) {
-        resetReviewFiltersBtn.addEventListener("click", () => {
-            currentRating = "all";
-            currentSort = "date";
-            currentYearFrom = 1950;
-            currentYearTo = 2026;
-
-            if (reviewYearFromInput) reviewYearFromInput.value = "1950";
-            if (reviewYearToInput) reviewYearToInput.value = "2026";
-            if (reviewsSortSelect) reviewsSortSelect.value = "date";
-
-            document.querySelectorAll('input[name="reviewType"]').forEach(input => {
-                input.checked = input.value === "TV Сериал";
-            });
-
-            document.querySelectorAll('input[name="reviewGenre"]').forEach(input => {
-                input.checked = false;
-            });
-
-            document.querySelectorAll(".filter-chip").forEach(item => {
-                item.classList.remove("active");
-            });
-
-            applyReviewsView(true);
-        });
-    }
 }
 
-setupReviewFilters();
-loadReviews();
+
+/* Следующая страница */
+
+if (nextPageButton) {
+
+    nextPageButton.addEventListener(
+        "click",
+        () => {
+
+            const filteredReviews =
+                getFilteredReviews();
+
+
+            const totalPages =
+                Math.ceil(
+                    filteredReviews.length /
+                    pageSize
+                );
+
+
+            if (
+                currentPage <
+                totalPages
+            ) {
+
+                currentPage++;
+
+
+                renderReviews();
+
+            }
+
+        }
+    );
+
+
+}
+
+
+/* Загрузка */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    () => {
+
+        loadReviews();
+
+    }
+);
