@@ -53,6 +53,43 @@ document.addEventListener(
         let totalPages = 1;
 
 
+        function getAnimeId(anime) {
+            return anime?.animeId;
+        }
+
+
+        function getPosterUrl(posterUrl) {
+            if (!posterUrl) {
+                return "";
+            }
+
+            const imageUrl =
+                String(posterUrl).trim();
+
+            if (!imageUrl) {
+                return "";
+            }
+
+            if (
+                imageUrl.startsWith("http://") ||
+                imageUrl.startsWith("https://") ||
+                imageUrl.startsWith("/")
+            ) {
+                return imageUrl;
+            }
+
+            if (imageUrl.startsWith("../")) {
+                return imageUrl;
+            }
+
+            if (imageUrl.startsWith("images/")) {
+                return `../${imageUrl}`;
+            }
+
+            return imageUrl;
+        }
+
+
         /* =========================
            ЗАГРУЗКА АНИМЕ
         ========================= */
@@ -140,12 +177,9 @@ document.addEventListener(
                 }
 
 
-                const data =
-                    await response.json();
+                const data = await response.json();
 
-
-                const animeList =
-                    data.items || [];
+                const animeList = data.items || [];
 
 
                 totalPages =
@@ -312,9 +346,14 @@ document.addEventListener(
            КАРТОЧКА АНИМЕ
         ========================= */
 
-        function createAnimeCard(
-            anime
-        ) {
+        function createAnimeCard(anime) {
+            const animeId =
+                getAnimeId(anime);
+
+            const href =
+                animeId === undefined || animeId === null
+                    ? "#"
+                    : `anime.html?id=${encodeURIComponent(animeId)}`;
 
             const title =
                 anime.titleRu ||
@@ -341,32 +380,16 @@ document.addEventListener(
                     : "";
 
 
-            let imageUrl =
-                anime.posterUrl ||
-                "";
-
-
-            if (
-                imageUrl &&
-                !imageUrl.startsWith(
-                    "http"
-                ) &&
-                !imageUrl.startsWith(
-                    "/"
-                )
-            ) {
-
-                imageUrl =
-                    "/" +
-                    imageUrl;
-
-            }
+            const imageUrl =
+                getPosterUrl(
+                    anime.posterUrl
+                );
 
 
             return `
 
                 <a
-                    href="anime.html?id=${anime.id}"
+                    href="${href}"
                     class="anime-card-link"
                 >
 
