@@ -10,7 +10,7 @@ def test_login_auth():
 
     with sync_playwright() as p:
 
-        browser = p.chromium.launch(headless = False, slow_mo = 1000) #запускаем браузер
+        browser = p.chromium.launch(headless = False, slow_mo = 1000) #запускаем браузер, где headless - показБ slow_mo - замедлить работу
 
         page = browser.new_page() #создать новую вклажку
 
