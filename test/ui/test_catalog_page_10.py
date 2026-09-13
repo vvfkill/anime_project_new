@@ -15,16 +15,16 @@ def test_catalog():
         cards = page.locator(".anime-card-link") #найди на текущей странице элементы, соответствующие этому CSS-селектору
         expect(cards).to_have_count(10)
 
-        for i in range(cards.count()):
-            card = cards.nth(i)
-            href = card.get_attribute("href")
+        for i in range(cards.count()): #cards - все карточки аниме
+            card = cards.nth(i) #из всех карточек берем только одну, i = 0 => card = первая карточка
+            href = card.get_attribute("href") #у конкретной карточки мы берем href(<a class="anime-card-link" href="anime.html?id=6">)
 
-            url = base_url + href
-            card.click()
-            expect(page).to_have_url(url)
+            url = base_url + href 
+            card.click() #нажимаем на текущую карточку
+            expect(page).to_have_url(url) #после клика URL страницы должен быть таким, каким мы его заранее получили из href
 
-            page.go_back()
-            expect(page).to_have_url(catalog_url)
+            page.go_back() 
+            expect(page).to_have_url(catalog_url) 
 
         browser.close()
 
