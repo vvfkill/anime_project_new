@@ -1,6 +1,6 @@
 from playwright.sync_api import sync_playwright
 
-url = "http://127.0.0.1:8000/api/anime/3"
+url = "http://127.0.0.1:8000/api/anime/23"
 
 def test_get_anime_anime_id():
     with sync_playwright() as p:
