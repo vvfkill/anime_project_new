@@ -9,10 +9,10 @@ def test_post_api_reviews():
         post_response = request.post(
             post_url,
             data = {
-                "userId": 1,
-                "animeId": 3, 
+                "userId": 2,
+                "animeId": 3,
                 "text": "testtest",
-                "scope": 6
+                "score": 6
              }
             )
 
@@ -20,19 +20,22 @@ def test_post_api_reviews():
         assert post_response.status == 200
 
         assert isinstance(post_data, dict)
-        assert isinstance (post_data["message"], str) 
+        assert isinstance (post_data["message"], str)
         assert isinstance (post_data["reviewId"], int)
 
         reviews_id = post_data["reviewId"]
 
-        get_url = "http://127.0.0.1:8000/api/reviews/anime/11"
+        get_url = "http://127.0.0.1:8000/api/reviews/anime/3"
         get_response = request.get(get_url)
 
         get_data = get_response.json()
-        assert get_response == 200
+        assert get_response.status == 200
 
-        assert get_data["reviewsId"] == reviews_id
+        review_found = False
+        for review in get_data:
+            if review["reviewId"] == reviews_id:
+                review_found = True #assert any(review["reviewId"] == reviews_id for review in get_data)
+
+        assert review_found
 
         request.dispose()
-
-
