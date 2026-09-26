@@ -1,0 +1,1006 @@
+openapi: 3.0.3
+info:
+  title: Anime Project API
+  version: 1.0.0
+paths:
+  /api/anime/:
+    get:
+      tags:
+      - Anime
+      summary: Get Anime
+      operationId: get_anime_api_anime__get
+      parameters:
+      - name: search
+        in: query
+        required: false
+        schema:
+          type: string
+          nullable: true
+          title: Search
+      - name: genre_id
+        in: query
+        required: false
+        schema:
+          type: integer
+          nullable: true
+          title: Genre Id
+      - name: tag_id
+        in: query
+        required: false
+        schema:
+          type: integer
+          nullable: true
+          title: Tag Id
+      - name: studio_id
+        in: query
+        required: false
+        schema:
+          type: integer
+          nullable: true
+          title: Studio Id
+      - name: year
+        in: query
+        required: false
+        schema:
+          type: integer
+          nullable: true
+          title: Year
+      - name: min_rating
+        in: query
+        required: false
+        schema:
+          type: number
+          nullable: true
+          title: Min Rating
+      - name: page
+        in: query
+        required: false
+        schema:
+          type: integer
+          default: 1
+          title: Page
+      - name: page_size
+        in: query
+        required: false
+        schema:
+          type: integer
+          default: 10
+          title: Page Size
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AnimePagedResultSchema'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    post:
+      tags:
+      - Anime
+      summary: Create Anime
+      operationId: create_anime_api_anime__post
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateAnimeSchema'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/anime/{anime_id}:
+    get:
+      tags:
+      - Anime
+      summary: Get Anime By Id
+      operationId: get_anime_by_id_api_anime__anime_id__get
+      parameters:
+      - name: anime_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Anime Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AnimeSchema'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/anime/{anime_id}/reviews:
+    get:
+      tags:
+      - Anime
+      summary: Get Anime Reviews
+      operationId: get_anime_reviews_api_anime__anime_id__reviews_get
+      parameters:
+      - name: anime_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Anime Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ReviewSchema'
+                title: Response Get Anime Reviews Api Anime  Anime Id  Reviews Get
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/reviews/:
+    get:
+      tags:
+      - Reviews
+      summary: Get Reviews
+      operationId: get_reviews_api_reviews__get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ReviewSchema'
+                type: array
+                title: Response Get Reviews Api Reviews  Get
+    post:
+      tags:
+      - Reviews
+      summary: Create Review
+      operationId: create_review_api_reviews__post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateReviewSchema'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/reviews/anime/{anime_id}:
+    get:
+      tags:
+      - Reviews
+      summary: Get Reviews By Anime
+      operationId: get_reviews_by_anime_api_reviews_anime__anime_id__get
+      parameters:
+      - name: anime_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Anime Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ReviewSchema'
+                title: Response Get Reviews By Anime Api Reviews Anime  Anime Id  Get
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/reviews/{review_id}:
+    delete:
+      tags:
+      - Reviews
+      summary: Delete Review
+      operationId: delete_review_api_reviews__review_id__delete
+      parameters:
+      - name: review_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Review Id
+      - name: user_id
+        in: query
+        required: true
+        schema:
+          type: integer
+          title: User Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/users:
+    get:
+      tags:
+      - Users
+      summary: Get Users
+      operationId: get_users_api_users_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+    post:
+      tags:
+      - Users
+      summary: Create User
+      operationId: create_user_api_users_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateUserDto'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/users/{user_id}:
+    get:
+      tags:
+      - Users
+      summary: Get User
+      operationId: get_user_api_users__user_id__get
+      parameters:
+      - name: user_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: User Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/users/login:
+    post:
+      tags:
+      - Users
+      summary: Login
+      operationId: login_api_users_login_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoginDto'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/users/{user_id}/list:
+    get:
+      tags:
+      - Users
+      summary: Get User List
+      operationId: get_user_list_api_users__user_id__list_get
+      parameters:
+      - name: user_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: User Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    post:
+      tags:
+      - Users
+      summary: Add To List
+      operationId: add_to_list_api_users__user_id__list_post
+      parameters:
+      - name: user_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: User Id
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AddToUserListDto'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/users/{user_id}/list/{anime_id}:
+    put:
+      tags:
+      - Users
+      summary: Update User List
+      operationId: update_user_list_api_users__user_id__list__anime_id__put
+      parameters:
+      - name: user_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: User Id
+      - name: anime_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Anime Id
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateUserListDto'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    delete:
+      tags:
+      - Users
+      summary: Delete From User List
+      operationId: delete_from_user_list_api_users__user_id__list__anime_id__delete
+      parameters:
+      - name: user_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: User Id
+      - name: anime_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Anime Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/bookmarks:
+    post:
+      tags:
+      - Bookmarks
+      summary: Add Bookmark
+      operationId: add_bookmark_api_bookmarks_post
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AddBookmarkSchema'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    delete:
+      tags:
+      - Bookmarks
+      summary: Delete Bookmark
+      operationId: delete_bookmark_api_bookmarks_delete
+      parameters:
+      - name: user_id
+        in: query
+        required: true
+        schema:
+          type: integer
+          title: User Id
+      - name: anime_id
+        in: query
+        required: true
+        schema:
+          type: integer
+          title: Anime Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/bookmarks/user/{user_id}:
+    get:
+      tags:
+      - Bookmarks
+      summary: Get User Bookmarks
+      operationId: get_user_bookmarks_api_bookmarks_user__user_id__get
+      parameters:
+      - name: user_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: User Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/bookmarks/check:
+    get:
+      tags:
+      - Bookmarks
+      summary: Check Bookmark
+      operationId: check_bookmark_api_bookmarks_check_get
+      parameters:
+      - name: user_id
+        in: query
+        required: true
+        schema:
+          type: integer
+          title: User Id
+      - name: anime_id
+        in: query
+        required: true
+        schema:
+          type: integer
+          title: Anime Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+components:
+  schemas:
+    AddBookmarkSchema:
+      properties:
+        userId:
+          type: integer
+          title: Userid
+        animeId:
+          type: integer
+          title: Animeid
+      type: object
+      required:
+      - userId
+      - animeId
+      title: AddBookmarkSchema
+    AddToUserListDto:
+      properties:
+        anime_id:
+          type: integer
+          title: Anime Id
+        status:
+          type: string
+          title: Status
+        score:
+          type: integer
+          nullable: true
+          title: Score
+      type: object
+      required:
+      - anime_id
+      - status
+      title: AddToUserListDto
+    AnimeCharacterSchema:
+      properties:
+        characterId:
+          type: integer
+          title: Characterid
+        name:
+          type: string
+          title: Name
+        nameOriginal:
+          type: string
+          nullable: true
+          title: Nameoriginal
+        description:
+          type: string
+          nullable: true
+          title: Description
+        gender:
+          type: string
+          nullable: true
+          title: Gender
+        roleType:
+          type: string
+          nullable: true
+          title: Roletype
+        imageUrl:
+          type: string
+          nullable: true
+          title: Imageurl
+        seiyus:
+          items:
+            $ref: '#/components/schemas/AnimeSeiyuSchema'
+          type: array
+          title: Seiyus
+          default: []
+      type: object
+      required:
+      - characterId
+      - name
+      title: AnimeCharacterSchema
+    AnimeListSchema:
+      properties:
+        animeId:
+          type: integer
+          title: Animeid
+        titleRu:
+          type: string
+          nullable: true
+          title: Titleru
+        titleOriginal:
+          type: string
+          title: Titleoriginal
+        releaseYear:
+          type: integer
+          nullable: true
+          title: Releaseyear
+        type:
+          type: string
+          nullable: true
+          title: Type
+        averageRating:
+          type: number
+          nullable: true
+          title: Averagerating
+        posterUrl:
+          type: string
+          nullable: true
+          title: Posterurl
+        genres:
+          items:
+            type: string
+          type: array
+          title: Genres
+          default: []
+      type: object
+      required:
+      - animeId
+      - titleOriginal
+      title: AnimeListSchema
+    AnimePagedResultSchema:
+      properties:
+        page:
+          type: integer
+          title: Page
+        pageSize:
+          type: integer
+          title: Pagesize
+        totalCount:
+          type: integer
+          title: Totalcount
+        totalPages:
+          type: integer
+          title: Totalpages
+        items:
+          items:
+            $ref: '#/components/schemas/AnimeListSchema'
+          type: array
+          title: Items
+          default: []
+      type: object
+      required:
+      - page
+      - pageSize
+      - totalCount
+      - totalPages
+      title: AnimePagedResultSchema
+    AnimeSchema:
+      properties:
+        animeId:
+          type: integer
+          title: Animeid
+        titleRu:
+          type: string
+          nullable: true
+          title: Titleru
+        titleOriginal:
+          type: string
+          title: Titleoriginal
+        description:
+          type: string
+          nullable: true
+          title: Description
+        fullDescription:
+          type: string
+          nullable: true
+          title: Fulldescription
+        releaseYear:
+          type: integer
+          nullable: true
+          title: Releaseyear
+        episodesTotal:
+          type: integer
+          nullable: true
+          title: Episodestotal
+        averageRating:
+          type: number
+          nullable: true
+          title: Averagerating
+        posterUrl:
+          type: string
+          nullable: true
+          title: Posterurl
+        genres:
+          items:
+            type: string
+          type: array
+          title: Genres
+          default: []
+        studios:
+          items:
+            type: string
+          type: array
+          title: Studios
+          default: []
+        tags:
+          items:
+            type: string
+          type: array
+          title: Tags
+          default: []
+        characters:
+          items:
+            $ref: '#/components/schemas/AnimeCharacterSchema'
+          type: array
+          title: Characters
+          default: []
+        similarAnime:
+          items:
+            $ref: '#/components/schemas/AnimeListSchema'
+          type: array
+          title: Similaranime
+          default: []
+      type: object
+      required:
+      - animeId
+      - titleOriginal
+      title: AnimeSchema
+    AnimeSeiyuSchema:
+      properties:
+        seiyuId:
+          type: integer
+          title: Seiyuid
+        name:
+          type: string
+          title: Name
+        nameOriginal:
+          type: string
+          nullable: true
+          title: Nameoriginal
+        country:
+          type: string
+          nullable: true
+          title: Country
+        photoUrl:
+          type: string
+          nullable: true
+          title: Photourl
+      type: object
+      required:
+      - seiyuId
+      - name
+      title: AnimeSeiyuSchema
+    CreateAnimeSchema:
+      properties:
+        titleOriginal:
+          type: string
+          title: Titleoriginal
+        titleRu:
+          type: string
+          nullable: true
+          title: Titleru
+        description:
+          type: string
+          nullable: true
+          title: Description
+        releaseYear:
+          type: integer
+          nullable: true
+          title: Releaseyear
+        episodesTotal:
+          type: integer
+          nullable: true
+          title: Episodestotal
+        durationMinutes:
+          type: integer
+          nullable: true
+          title: Durationminutes
+        posterUrl:
+          type: string
+          nullable: true
+          title: Posterurl
+      type: object
+      required:
+      - titleOriginal
+      title: CreateAnimeSchema
+    CreateReviewSchema:
+      properties:
+        userId:
+          type: integer
+          title: Userid
+        animeId:
+          type: integer
+          title: Animeid
+        text:
+          type: string
+          title: Text
+        score:
+          type: integer
+          title: Score
+      type: object
+      required:
+      - userId
+      - animeId
+      - text
+      - score
+      title: CreateReviewSchema
+    CreateUserDto:
+      properties:
+        nickname:
+          type: string
+          title: Nickname
+        email:
+          type: string
+          title: Email
+        phone:
+          type: string
+          title: Phone
+        password:
+          type: string
+          title: Password
+      type: object
+      required:
+      - nickname
+      - email
+      - phone
+      - password
+      title: CreateUserDto
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    LoginDto:
+      properties:
+        email:
+          type: string
+          title: Email
+        password:
+          type: string
+          title: Password
+      type: object
+      required:
+      - email
+      - password
+      title: LoginDto
+    ReviewSchema:
+      properties:
+        reviewId:
+          type: integer
+          title: Reviewid
+        userId:
+          type: integer
+          title: Userid
+        animeId:
+          type: integer
+          title: Animeid
+        userNickname:
+          type: string
+          nullable: true
+          title: Usernickname
+        animeTitleRu:
+          type: string
+          nullable: true
+          title: Animetitleru
+        animeTitleOriginal:
+          type: string
+          nullable: true
+          title: Animetitleoriginal
+        posterUrl:
+          type: string
+          nullable: true
+          title: Posterurl
+        releaseYear:
+          type: integer
+          nullable: true
+          title: Releaseyear
+        type:
+          type: string
+          nullable: true
+          title: Type
+        averageRating:
+          type: number
+          nullable: true
+          title: Averagerating
+        text:
+          type: string
+          title: Text
+        score:
+          type: integer
+          title: Score
+        createdAt:
+          type: string
+          format: date-time
+          nullable: true
+          title: Createdat
+        genres:
+          items:
+            type: string
+          type: array
+          title: Genres
+          default: []
+      type: object
+      required:
+      - reviewId
+      - userId
+      - animeId
+      - text
+      - score
+      title: ReviewSchema
+    UpdateUserListDto:
+      properties:
+        status:
+          type: string
+          nullable: true
+          title: Status
+        score:
+          type: integer
+          nullable: true
+          title: Score
+      type: object
+      title: UpdateUserListDto
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+        input:
+          title: Input
+        ctx:
+          type: object
+          title: Context
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError

@@ -12,7 +12,7 @@ def test_get_anime_anime_id():
 
         assert response.status == 200
 
-        assert isinstance (data, dict) 
+        assert isinstance (data, dict)
 
         assert isinstance (data["animeId"], int)
         assert isinstance (data["titleRu"], (str, type(None)))
@@ -25,7 +25,7 @@ def test_get_anime_anime_id():
         assert isinstance (data["posterUrl"], (str, type(None)))
 
         assert isinstance (data["genres"], list)
-        for genre in data["genres"]: 
+        for genre in data["genres"]:
             assert isinstance(genre, str)
 
         assert isinstance (data["studios"], list)
@@ -69,7 +69,7 @@ def test_get_anime_anime_id():
 
             assert isinstance (similar["genres"], list)
             for genre in similar["genres"]:
-                    assert isinstance(genre, str)  
+                    assert isinstance(genre, str)
 
         print(data)
 
