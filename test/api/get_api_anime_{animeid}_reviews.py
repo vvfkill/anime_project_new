@@ -13,10 +13,10 @@ def test_get_api_anime_animeid_reviews():
         assert response.status == 200
         assert isinstance(data, list)
 
-        for anime in data():
-            assert isinstance(anime["reviewsId"], int)
-            assert isinstance(anime["userId"], int)
-            assert isinstance(anime["animeId"], int)
+        for anime in data:
+            assert isinstance (anime["reviewId"], int)
+            assert isinstance (anime["userId"], int)
+            assert isinstance (anime["animeId"], int)
             assert isinstance (anime["userNickname"], (str, type(None)))
             assert isinstance (anime["animeTitleRu"], (str, type(None)))
             assert isinstance (anime["animeTitleOriginal"], (str, type(None)))
@@ -30,5 +30,5 @@ def test_get_api_anime_animeid_reviews():
 
             for genre in anime["genres"]:
                     assert isinstance (genre, str)
-        
-        print(data)
+
+        response.dispose()
