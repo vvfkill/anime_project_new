@@ -1,7 +1,10 @@
-url = "http://127.0.0.1:8000/api/anime/23"
+import pytest
 
-def test_get_anime_anime_id(api_request):
-    response = api_request.get(url)
+url = "http://127.0.0.1:8000/api/anime/"
+
+@pytest.mark.parametrize("anime_id", [2,5,6])
+def test_get_anime_anime_id(api_request, anime_id):
+    response = api_request.get(f"{url}{anime_id}")
 
     data = response.json()
 
@@ -10,6 +13,8 @@ def test_get_anime_anime_id(api_request):
     assert isinstance (data, dict)
 
     assert isinstance (data["animeId"], int)
+    assert data["animeId"] == anime_id
+
     assert isinstance (data["titleRu"], (str, type(None)))
     assert isinstance (data["titleOriginal"], str)
     assert isinstance (data["fullDescription"], (str, type(None)))

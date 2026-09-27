@@ -1,7 +1,9 @@
-url = "http://127.0.0.1:8000/api/anime/1/reviews"
+import pytest
 
-def test_get_api_anime_animeid_reviews(api_request):
-    response = api_request.get(url)
+url = "http://127.0.0.1:8000/api/anime/"
+@pytest.mark.parametrize("anime_id", [3,8,11])
+def test_get_api_anime_animeid_reviews(api_request, anime_id):
+    response = api_request.get(f"{url}{anime_id}/reviews")
 
     data = response.json()
 
@@ -11,7 +13,10 @@ def test_get_api_anime_animeid_reviews(api_request):
     for anime in data:
         assert isinstance (anime["reviewId"], int)
         assert isinstance (anime["userId"], int)
+
         assert isinstance (anime["animeId"], int)
+        assert anime["animeId"] == anime_id
+
         assert isinstance (anime["userNickname"], (str, type(None)))
         assert isinstance (anime["animeTitleRu"], (str, type(None)))
         assert isinstance (anime["animeTitleOriginal"], (str, type(None)))

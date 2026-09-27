@@ -15,3 +15,7 @@ env/
 .pytest_cache/
 .coverage
 htmlcov/
+
+__pycache__/
+.pytest_cache/
+*.pyc
