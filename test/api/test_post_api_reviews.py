@@ -1,41 +1,34 @@
-from playwright.sync_api import sync_playwright
-
 post_url = "http://127.0.0.1:8000/api/reviews/"
 
-def test_post_api_reviews():
-    with sync_playwright() as p:
+def test_post_api_reviews(api_request):
+    post_response = api_request.post(
+        post_url,
+        data = {
+            "userId": 2,
+            "animeId": 3,
+            "text": "testtest",
+            "score": 6
+            }
+        )
 
-        request = p.request.new_context()
-        post_response = request.post(
-            post_url,
-            data = {
-                "userId": 2,
-                "animeId": 3,
-                "text": "testtest",
-                "score": 6
-             }
-            )
+    post_data = post_response.json()
+    assert post_response.status == 200
 
-        post_data = post_response.json()
-        assert post_response.status == 200
+    assert isinstance(post_data, dict)
+    assert isinstance (post_data["message"], str)
+    assert isinstance (post_data["reviewId"], int)
 
-        assert isinstance(post_data, dict)
-        assert isinstance (post_data["message"], str)
-        assert isinstance (post_data["reviewId"], int)
+    reviews_id = post_data["reviewId"]
 
-        reviews_id = post_data["reviewId"]
+    get_url = "http://127.0.0.1:8000/api/reviews/anime/3"
+    get_response = api_request.get(get_url)
 
-        get_url = "http://127.0.0.1:8000/api/reviews/anime/3"
-        get_response = request.get(get_url)
+    get_data = get_response.json()
+    assert get_response.status == 200
 
-        get_data = get_response.json()
-        assert get_response.status == 200
+    review_found = False
+    for review in get_data:
+        if review["reviewId"] == reviews_id:
+            review_found = True #assert any(review["reviewId"] == reviews_id for review in get_data)
 
-        review_found = False
-        for review in get_data:
-            if review["reviewId"] == reviews_id:
-                review_found = True #assert any(review["reviewId"] == reviews_id for review in get_data)
-
-        assert review_found
-
-        request.dispose()
+    assert review_found
